@@ -21,12 +21,27 @@ public class DoctorsActivity extends AppCompatActivity {
     ListView mListView;
 
 
-    private String[] doctors = new String[] {"Sweet Hereafter", "Cricket", "Hawthorne Fish House", "Viking Soul Food", "Red Square",
-            "Horse Brass", "Dick's Kitchen", "Taco Bell", "Me Kha Noodle Bar", "La Bonita Taqueria", "Smokehouse Tavern", "Pembiche", "Kay's Bar", "Gnarly Grey", "Slappy Cakes", "Mi Mero Mole" };
+    private String[] doctors = new String[] {"Jay Bell", "Dan Bell", "Amy Bell", "Bel Kis",
+            "Angela Bell", "Lori Day", "Julianne", "Mary Balson", "Ashley", "Troy", "Kandi",
+            "Pamela John", "Anup's Belur", "Nella Bello", "Belinda Bells"};
 
-    private String[] information = new String[] {"Vegan Food", "Breakfast", "Fishs Dishs",
-            "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican",
-            "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican" };
+    private String[] information = new String[] {"Specializes in your and your family's health",
+            "Specializes in physical therapy",
+            "Specializes in the care of the female reproductive system",
+            "Specializes in imaging via X-rays and ultrasound.", "Specializes in vision and " +
+            "prescribing glasses and contact lenses",
+            "Specializes in physical therapy",
+            "Specializes in managing pain and anesthesia in surgeries",
+            "Specializes in physical therapy.",
+            "Physical therapist assistants are skilled health care providers ",
+            " An occupational therapist is a person who has graduated from an entry-level " +
+                    "occupational therapy program accredited by the Accreditation Council for " +
+                    "Occupational Therapy Education (ACOTE) or predecessor organizations",
+            "Description is unavailable", "Specializes in managing pain and anesthesia in " +
+            "surgeries", "Specializes in physical therapy.", "Specializes in teeth and oral health",
+            "An occupational therapist is a person who has graduated from an entry-level" +
+                    " occupational therapy program accredited by the Accreditation Council for" +
+                    " Occupational Therapy Education (ACOTE) or predecessor organizations" };
 
 
     @Override
