@@ -13,9 +13,9 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public static final String TAG = MainActivity.class.getSimpleName();
+
 
     @Bind(R.id.findDoctorsButton)
     Button mFindDoctorsButton;
@@ -35,24 +35,22 @@ public class MainActivity extends AppCompatActivity {
         Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/ostrich-regular.ttf");
         mAppNameTextView.setTypeface(ostrichFont);
 
-        mFindDoctorsButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+        mFindDoctorsButton.setOnClickListener(this);
+    }
+
+        @Override
+        public void onClick(View v) {
+
+            if (v == mFindDoctorsButton) {
 
                 String location = mLocationEditText.getText().toString();
-                Log.d(TAG, location);
-
-//                Toast.makeText(MainActivity.this, "Hello!", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
 
             }
-
-
-        });
+        }
 
 
     }
-}
+
