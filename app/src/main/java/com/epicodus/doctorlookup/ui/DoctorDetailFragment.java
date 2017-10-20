@@ -27,7 +27,7 @@ public class DoctorDetailFragment extends Fragment {
 //    ImageView mImageLabel;
     @Bind(R.id.doctorNameTextView) TextView mNameLabel;
 //    @Bind(R.id.cuisineTextView) TextView mCategoriesLabel;
-    @Bind(R.id.ratingTextView) TextView mRatingLabel;
+//    @Bind(R.id.ratingTextView) TextView mRatingLabel;
     @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
     @Bind(R.id.phoneTextView) TextView mPhoneLabel;
     @Bind(R.id.addressTextView) TextView mAddressLabel;
@@ -57,7 +57,18 @@ public class DoctorDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_doctor_detail, container, false);
+        ButterKnife.bind(this, view);
+
+//        Picasso.with(view.getContext()).load(mDoctor.getImageUrl()).into(mImageLabel);
+
+        mNameLabel.setText(mDoctor.getFirstName());
+//        mCategoriesLabel.setText(android.text.TextUtils.join(", ", mRestaurant.getCategories()));
+ //       mRatingLabel.setText(Double.toString(mDoctor.getRating()) + "/5");
+        mPhoneLabel.setText((CharSequence) mDoctor.getPhones());
+        //mAddressLabel.setText(android.text.TextUtils.join(", ", mDoctor.getAddress()));
+
+        return view;
     }
 
 }
