@@ -1,12 +1,14 @@
 # Doctor Lookup Website Android Independent Project
 
-#### Doctor Lookup Application, October 13 2017
+#### Doctor Lookup Application, October 20 2017
+
+##### Usage - Web Service Backends and Custom Fragments 
 
 #### By Shyamal Punekar
 
 ## Description
 
-_An Android application where users may enter a medical issue into a form, submit it, and receive a list of doctors in your city (e.g. Portland).._
+_An Android application where users may enter a name of doctor into a form, submit it, and receive a list of doctors in your city (e.g. Portland).._
 
 ## Setup/Installation Requirements
 * Open Android Studio
@@ -38,7 +40,8 @@ _There are no known bugs at this time!_
 * Android Studio
 * xml
 * Java
-* RoboElectric
+* Postman
+* Doctor API
 
 
 ### License
