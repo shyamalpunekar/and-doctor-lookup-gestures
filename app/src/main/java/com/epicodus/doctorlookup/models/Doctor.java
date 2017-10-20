@@ -1,5 +1,9 @@
 package com.epicodus.doctorlookup.models;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by spuek on 10/19/17.
  */
@@ -10,12 +14,18 @@ public class Doctor {
     private String lastName;
     private String title;
 
-    public Doctor(String uuid, String firstName, String lastName, String title, String website) {
+
+    private Set<String> websites;
+
+    private Map<String, String> phones;
+
+    public Doctor(String uuid, String firstName, String lastName, String title, Set<String> websites, Map<String, String> phones) {
         this.uuid = uuid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
-        this.website = website;
+        this.websites = websites;
+        this.phones = phones;
     }
 
     public String getUuid() {
@@ -50,15 +60,21 @@ public class Doctor {
         this.title = title;
     }
 
-    public String getWebsite() {
-        return website;
+
+    public Map<String, String> getPhones() {
+        return phones;
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
+    public void setPhones(Map<String, String> phone) {
+        this.phones = phone;
     }
 
-    private String website;
 
+    public Set<String> getWebsites() {
+        return websites;
+    }
 
+    public void setWebsites(Set<String> websites) {
+        this.websites = websites;
+    }
 }

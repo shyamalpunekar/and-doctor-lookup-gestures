@@ -1,17 +1,21 @@
-package com.epicodus.doctorlookup;
+package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.epicodus.doctorlookup.adapters.MyDoctorsArrayAdapter;
+import com.epicodus.doctorlookup.R;
+import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
 import com.epicodus.doctorlookup.models.Doctor;
+import com.epicodus.doctorlookup.services.BetterdoctorService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +35,9 @@ public class DoctorsActivity extends AppCompatActivity {
     TextView mNameTextView;
     @Bind(R.id.listView)
     ListView mListView;
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+    private DoctorListAdapter mAdapter;
     public ArrayList<Doctor> mDoctors = new ArrayList<>();
 
     private String[] doctors = new String[]{"Jay Bell", "Dan Bell", "Amy Bell", "Bel Kis",
@@ -64,7 +71,7 @@ public class DoctorsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 //        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors);
 
-        MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, doctors, information);
+        MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors, information);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,7 +85,7 @@ public class DoctorsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
 
-        mNameTextView.setText("Here are all the doctors near: " + name);
+
         getDoctors(name);
 
     }
@@ -97,21 +104,29 @@ public class DoctorsActivity extends AppCompatActivity {
                 public void onResponse(Call call, Response response) throws IOException {
 
                     try {
-                        String jsonData = response.body().string();
-                        if (response.isSuccessful()){
-                            Log.v(TAG, jsonData);
+//                        String jsonData = response.body().string();
+//                        if (response.isSuccessful()){
+//                            Log.v(TAG, jsonData);
                             mDoctors = betterdoctorService.processResults(response);
 
-                        }
-//                        DoctorsActivity.this.runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                //Handle UI here
-//                                //findViewById(R.id.loading).setVisibility(View.GONE);
-//                            }
-//                        });
+                       // }
+                        DoctorsActivity.this.runOnUiThread(new Runnable() {
 
-                    } catch (IOException e) {
+                            @Override
+                            public void run() {
+
+
+                                mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
+                                mRecyclerView.setAdapter(mAdapter);
+                                RecyclerView.LayoutManager layoutManager =
+                                        new LinearLayoutManager(DoctorsActivity.this);
+                                mRecyclerView.setLayoutManager(layoutManager);
+                                mRecyclerView.setHasFixedSize(true);
+
+                            }
+                        });
+
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
