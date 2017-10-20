@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (v == mFindDoctorsButton) {
 
-                String location = mLocationEditText.getText().toString();
+                String name = mLocationEditText.getText().toString();
                 Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
-                intent.putExtra("location", location);
+                intent.putExtra("name", name);
                 startActivity(intent);
 
             }
