@@ -37,8 +37,13 @@ public class DoctorDetailFragment extends Fragment {
     private Doctor mDoctor;
 
 
-    public DoctorDetailFragment() {
+    public DoctorDetailFragment newInstance(Doctor doctor) {
         // Required empty public constructor
+        DoctorDetailFragment doctorDetailFragment = new DoctorDetailFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("restaurant", Parcels.wrap(doctor));
+        doctorDetailFragment.setArguments(args);
+        return doctorDetailFragment;
     }
 
 
