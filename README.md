@@ -19,11 +19,13 @@ _An Android application where users may enter a name of doctor into a form, subm
 
 | Behavior      | Input | Output |
 | ------------- | ------------- | ------------- |
-| The user shall be able to enter  sip code to receive a list of doctors in the Portland area that fit the search query | 97008 | | |
+| The user shall be able to enter  name to receive a list of doctors in the Portland area that fit the search query | lynda | | |
 | A user should be able to to click on name to receive a doctor's information in the Portland area that fit the search query | | | |
 | The user should be able to navigate between Home Page and doctor list page |  |  |
 
 # Screenshots
+
+
 
 # Setup
   https://github.com/shyamalpunekar/doctor-lookup
