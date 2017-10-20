@@ -41,11 +41,17 @@ public class DoctorDetailFragment extends Fragment {
         // Required empty public constructor
         DoctorDetailFragment doctorDetailFragment = new DoctorDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("restaurant", Parcels.wrap(doctor));
+        args.putParcelable("doctor", Parcels.wrap(doctor));
         doctorDetailFragment.setArguments(args);
         return doctorDetailFragment;
     }
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mDoctor = Parcels.unwrap(getArguments().getParcelable("doctor"));
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
