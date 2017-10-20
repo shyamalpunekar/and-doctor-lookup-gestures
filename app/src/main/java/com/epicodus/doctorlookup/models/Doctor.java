@@ -3,11 +3,14 @@ package com.epicodus.doctorlookup.models;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.parceler.Parcel;
 
 /**
  * Created by spuek on 10/19/17.
  */
 
+
+@Parcel
 public class Doctor {
     private String uuid;
     private String firstName;
@@ -18,6 +21,8 @@ public class Doctor {
     private Set<String> websites;
 
     private Map<String, String> phones;
+
+    public Doctor(){}
 
     public Doctor(String uuid, String firstName, String lastName, String title, Set<String> websites, Map<String, String> phones) {
         this.uuid = uuid;
