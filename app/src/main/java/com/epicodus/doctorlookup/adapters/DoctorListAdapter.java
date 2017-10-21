@@ -65,9 +65,9 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
 
         @Bind(R.id.doctorWebsiteTextView)
         TextView mWebsiteTextView;
-//
-//        @Bind(R.id.categoryTextView) TextView mCategoryTextView;
-//        @Bind(R.id.ratingTextView) TextView mRatingTextView;
+
+        @Bind(R.id.doctorAcceptsPatientsTextView)
+        TextView mAcceptsPatients;
 
         private Context mContext;
 
@@ -87,6 +87,12 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
             mLastNameTextView.setText("Last Name: " +doctor.getLastName());
             mPhoneTextView.setText("Phones: " + doctor.getPhones().toString());
             mWebsiteTextView.setText("Websites:" + doctor.getWebsites().toString());
+            if(doctor.isAccepts_new_patients()){
+                mAcceptsPatients.setText("Accepts new Patients: " + "Yes");
+            }
+            else {
+                mAcceptsPatients.setText("Accepts new Patients: " + "No");
+            }
         }
 
         @Override

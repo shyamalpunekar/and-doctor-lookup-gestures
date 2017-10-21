@@ -54,6 +54,7 @@ public class BetterdoctorService {
         ArrayList<Doctor> doctors = new ArrayList<>();
         Set<String> websites = new HashSet<>();
         Map<String, String> phones = null;
+        boolean accepts_new_patients =false;
 
         List<Practice> practices = new ArrayList<>();
         try {
@@ -85,6 +86,14 @@ public class BetterdoctorService {
                            individualPractice.setWebsite("Website No Available");
                        }
 
+                       if(!practice.isNull("accepts_new_patients")) {
+                           if(practice.getBoolean("accepts_new_patients"))
+                           accepts_new_patients = true;
+                       }
+                       else {
+                           individualPractice.setWebsite("Website No Available");
+                       }
+
                        if(practice.getJSONArray("phones") != null) {
                            boolean isPhoneExists = false;
                            phones  = new HashMap<>();
@@ -111,8 +120,14 @@ public class BetterdoctorService {
                        if(!practice.isNull("visit_address")) {
                            Map<String, String> visitAddress = new HashMap<>();
                            isVisitAddress = true;
-                           visitAddress.put("city",practice.getJSONObject("visit_address").get("city").toString());
+                           visitAddress.put("City: ",practice.getJSONObject("visit_address").get("city").toString());
+                           visitAddress.put("State: ",practice.getJSONObject("visit_address").get("state").toString());
+                           visitAddress.put("Street: ",practice.getJSONObject("visit_address").get("street").toString());
+//                           visitAddress.put("Street2: ",practice.getJSONObject("visit_address").get("street2").toString());
+                           visitAddress.put("Zip: ",practice.getJSONObject("visit_address").get("zip").toString());
+
                            individualPractice.setVisitAddress(visitAddress);
+                           practices.add(individualPractice);
 
                        }
                        else {
@@ -158,7 +173,7 @@ public class BetterdoctorService {
                }
 
                 Doctor doctor = new Doctor(uuid, firstName, lastName, title,
-                         websites, phones, practices);
+                         websites, phones, practices,accepts_new_patients);
                 doctors.add(doctor);
             }
         }

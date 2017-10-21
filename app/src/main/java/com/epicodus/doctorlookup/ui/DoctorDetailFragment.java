@@ -44,9 +44,12 @@ public class DoctorDetailFragment extends Fragment {
     TextView mWebsiteLabel;
     @Bind(R.id.phoneTextView)
     TextView mPhoneLabel;
-    @Bind(R.id.addressTextView) TextView mAddressLabel;
+    @Bind(R.id.addressTextView)
+    TextView mAddressLabel;
     @Bind(R.id.saveDoctorButton)
     TextView mSaveRestaurantButton;
+    @Bind(R.id.doctorAcceptsPatientsTextView)
+    TextView mAcceptsPatients;
 
 
 
@@ -85,15 +88,22 @@ public class DoctorDetailFragment extends Fragment {
         doctors.add(mDoctor);
     //   Picasso.with(view.getContext()).load(mDoctor.getImageUrl()).into(mImageLabel);
 
-        mTitle.setText("Title:" + mDoctor.getTitle());
-        mNameLabel.setText("First Name:" + mDoctor.getFirstName());
-        mLastName.setText("Last Name:" + mDoctor.getLastName());
+        mTitle.setText("Title: " + mDoctor.getTitle());
+        mNameLabel.setText("First Name: " + mDoctor.getFirstName());
+        mLastName.setText("Last Name: " + mDoctor.getLastName());
+
+        if(mDoctor.isAccepts_new_patients()){
+            mAcceptsPatients.setText("Accepts new Patients: " + "Yes");
+        }
+        else {
+            mAcceptsPatients.setText("Accepts new Patients: " + "No");
+        }
 
         mAdapter = new DoctorListAdapter(getActivity().getApplicationContext(),doctors);
 
-        mPhoneLabel.setText("Phones: \n" +mDoctor.getPhones().toString());
-        mWebsiteLabel.setText("Websites: \n" +mDoctor.getWebsites().toString());
-
+        mPhoneLabel.setText("Phones: " +mDoctor.getPhones().toString());
+        mWebsiteLabel.setText("Websites: " +mDoctor.getWebsites().toString());
+        mAddressLabel.setText("Address: " + mDoctor.getPractices().get(0).getVisitAddress().toString());
         return view;
     }
 
