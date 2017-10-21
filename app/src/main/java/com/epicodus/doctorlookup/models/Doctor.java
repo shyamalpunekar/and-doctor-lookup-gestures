@@ -16,21 +16,21 @@ public class Doctor {
     private String firstName;
     private String lastName;
     private String title;
-
-
     private Set<String> websites;
-
     private Map<String, String> phones;
+    private List<Practice> practices;
 
     public Doctor(){}
 
-    public Doctor(String uuid, String firstName, String lastName, String title, Set<String> websites, Map<String, String> phones) {
+    public Doctor(String uuid, String firstName, String lastName, String title, Set<String> websites, Map<String, String> phones, List<Practice> practices) {
         this.uuid = uuid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
         this.websites = websites;
         this.phones = phones;
+        this.practices = practices;
+
     }
 
     public String getUuid() {
@@ -81,5 +81,13 @@ public class Doctor {
 
     public void setWebsites(Set<String> websites) {
         this.websites = websites;
+    }
+
+    public List<Practice> getPractices() {
+        return practices;
+    }
+
+    public void setPractices(List<Practice> practices) {
+        this.practices = practices;
     }
 }

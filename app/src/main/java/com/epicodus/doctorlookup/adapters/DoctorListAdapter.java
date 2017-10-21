@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.epicodus.doctorlookup.ui.DoctorDetailActivity;
 import com.epicodus.doctorlookup.ui.DoctorsActivity;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.models.Doctor;
@@ -90,7 +92,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
         @Override
         public void onClick(View v){
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, DoctorsActivity.class);
+            Intent intent = new Intent(mContext, DoctorDetailActivity.class);
 
             intent.putExtra("position", String.valueOf(itemPosition));
             intent.putExtra("doctors", Parcels.wrap(mDoctors));

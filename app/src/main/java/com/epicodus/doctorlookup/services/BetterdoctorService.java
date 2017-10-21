@@ -2,6 +2,7 @@ package com.epicodus.doctorlookup.services;
 
 import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.models.Doctor;
+import com.epicodus.doctorlookup.models.Practice;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +53,9 @@ public class BetterdoctorService {
     public ArrayList<Doctor> processResults(Response response) {
         ArrayList<Doctor> doctors = new ArrayList<>();
         Set<String> websites = new HashSet<>();
-        Map<String, String> phones  = new HashMap<>();
+        Map<String, String> phones = null;
+
+        List<Practice> practices = new ArrayList<>();
         try {
             String jsonData = response.body().string();
             JSONObject doctorJson = new JSONObject(jsonData);
@@ -65,38 +68,38 @@ public class BetterdoctorService {
                 String firstName = doctorJSON.getJSONObject("profile").get("first_name").toString();
                 String lastName = doctorJSON.getJSONObject("profile").get("last_name").toString();
                 String title = doctorJSON.getJSONObject("profile").get("title").toString();;
-              //  String phone = doctorJSON.optString("display_phone", "Phone not available");
                if(doctorJSON.getJSONArray("practices") != null ) {
                    boolean isWebsiteExists = false;
+                   boolean isVisitAddress = false;
                    for(int j =0; j< doctorJSON.getJSONArray("practices").length(); j++) {
-                       JSONObject practices = doctorJSON.getJSONArray("practices").getJSONObject(i);
-                       if(!practices.isNull("website")) {
+                    Practice individualPractice = new Practice();
+                       JSONObject practice = doctorJSON.getJSONArray("practices").getJSONObject(i);
+
+                       if(!practice.isNull("website")) {
                            isWebsiteExists = true;
-                           websites.add(practices.get("website").toString());
+                           websites.add(practice.get("website").toString());
+                           individualPractice.setWebsite(practice.get("website").toString());
+
+                       }
+                       else {
+                           individualPractice.setWebsite("Website No Available");
                        }
 
-                   }
-
-                   if(!isWebsiteExists && websites.size() ==0 ) {
-                       websites.add("No Website Available");
-                   }
-
-                   for(int j =0; j< doctorJSON.getJSONArray("practices").length(); j++) {
-                       JSONObject practices = doctorJSON.getJSONArray("practices").getJSONObject(i);
-                       if(practices.getJSONArray("phones") != null) {
+                       if(practice.getJSONArray("phones") != null) {
                            boolean isPhoneExists = false;
+                           phones  = new HashMap<>();
+                           for(int k =0; k< practice.getJSONArray("phones").length(); k++) {
 
-                           for(int k =0; k< practices.getJSONArray("phones").length(); k++) {
-
-                                if(practices.getJSONArray("phones") != null ) {
-                                    JSONObject phone = practices.getJSONArray("phones").getJSONObject(k);
-                                    if (phone != null) {
-                                        isPhoneExists = true;
-                                        String phoneNumber = phone.get("number").toString();
-                                        String type = phone.get("type").toString();
-                                        phones.put(type, phoneNumber);
-                                    }
-                                }
+                               if(practice.getJSONArray("phones") != null ) {
+                                   JSONObject phone = practice.getJSONArray("phones").getJSONObject(k);
+                                   if (phone != null) {
+                                       isPhoneExists = true;
+                                       String phoneNumber = phone.get("number").toString();
+                                       String type = phone.get("type").toString();
+                                       phones.put(type, phoneNumber);
+                                       individualPractice.setPhones(phones);
+                                   }
+                               }
                            }
 
                            if(!isPhoneExists && phones.size() ==0 ) {
@@ -105,13 +108,57 @@ public class BetterdoctorService {
 
                        }
 
+                       if(!practice.isNull("visit_address")) {
+                           Map<String, String> visitAddress = new HashMap<>();
+                           isVisitAddress = true;
+                           visitAddress.put("city",practice.getJSONObject("visit_address").get("city").toString());
+                           individualPractice.setVisitAddress(visitAddress);
+
+                       }
+                       else {
+                           Map<String, String> visitAddress = new HashMap<>();
+                           visitAddress.put("Visit Address", "Not Avilable");
+                           individualPractice.setVisitAddress(visitAddress);
+                       }
+
 
                    }
+
+                   if(!isWebsiteExists && websites.size() ==0 ) {
+                       websites.add("No Website Available");
+                   }
+
+//                   for(int j =0; j< doctorJSON.getJSONArray("practices").length(); j++) {
+//                       JSONObject practice = doctorJSON.getJSONArray("practices").getJSONObject(i);
+//                       if(practice.getJSONArray("phones") != null) {
+//                           boolean isPhoneExists = false;
+//
+//                           for(int k =0; k< practice.getJSONArray("phones").length(); k++) {
+//
+//                                if(practice.getJSONArray("phones") != null ) {
+//                                    JSONObject phone = practice.getJSONArray("phones").getJSONObject(k);
+//                                    if (phone != null) {
+//                                        isPhoneExists = true;
+//                                        String phoneNumber = phone.get("number").toString();
+//                                        String type = phone.get("type").toString();
+//                                        phones.put(type, phoneNumber);
+//                                    }
+//                                }
+//                           }
+//
+//                           if(!isPhoneExists && phones.size() ==0 ) {
+//                               phones.put("Phone#" ,"Phone# is not Available!");
+//                           }
+//
+//                       }
+//
+//
+//                   }
 
                }
 
                 Doctor doctor = new Doctor(uuid, firstName, lastName, title,
-                         websites, phones);
+                         websites, phones, practices);
                 doctors.add(doctor);
             }
         }

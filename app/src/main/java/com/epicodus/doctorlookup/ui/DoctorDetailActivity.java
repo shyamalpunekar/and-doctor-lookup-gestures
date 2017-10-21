@@ -28,7 +28,7 @@ public class DoctorDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mDoctors = Parcels.unwrap(getIntent().getParcelableExtra("doctors"));
-        int startingPosition = getIntent().getIntExtra("position", 0);
+        int startingPosition = Integer.parseInt(getIntent().getStringExtra("position"));
 
         adapterViewPager = new DoctorPagerAdapter(getSupportFragmentManager(), mDoctors);
         mViewPager.setAdapter(adapterViewPager);
