@@ -77,7 +77,7 @@ public class DoctorsActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String restaurant = ((TextView) view).getText().toString();
+                String doctor = ((TextView) view).getText().toString();
 
             }
         });
@@ -87,6 +87,10 @@ public class DoctorsActivity extends AppCompatActivity {
 
 
         getDoctors(name);
+        if(mDoctors.size() ==0) {
+
+
+        }
 
     }
 
@@ -104,18 +108,11 @@ public class DoctorsActivity extends AppCompatActivity {
                 public void onResponse(Call call, Response response) throws IOException {
 
                     try {
-//                        String jsonData = response.body().string();
-//                        if (response.isSuccessful()){
-//                            Log.v(TAG, jsonData);
+                            Log.v(TAG, response.body().string());
                             mDoctors = betterdoctorService.processResults(response);
-
-                       // }
-                        DoctorsActivity.this.runOnUiThread(new Runnable() {
-
+                            DoctorsActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
-
                                 mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
                                 mRecyclerView.setAdapter(mAdapter);
                                 RecyclerView.LayoutManager layoutManager =
@@ -133,30 +130,5 @@ public class DoctorsActivity extends AppCompatActivity {
 
             });
         }
-
-//    private void getDoctors(String name) {
-//        final BetterdoctorService betterdoctorService = new BetterdoctorService();
-//
-//        betterdoctorService.findRDoctors(name, new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                mDoctors = betterdoctorService.processResults(response);
-//                try {
-//                    String jsonData = response.body().string();
-//                    Log.v(TAG, jsonData);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        });
-//    }
-
-
 
 }

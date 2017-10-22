@@ -74,7 +74,7 @@ public class BetterdoctorService {
                    boolean isVisitAddress = false;
                    for(int j =0; j< doctorJSON.getJSONArray("practices").length(); j++) {
                     Practice individualPractice = new Practice();
-                       JSONObject practice = doctorJSON.getJSONArray("practices").getJSONObject(i);
+                       JSONObject practice = doctorJSON.getJSONArray("practices").getJSONObject(j);
 
                        if(!practice.isNull("website")) {
                            isWebsiteExists = true;
@@ -142,34 +142,6 @@ public class BetterdoctorService {
                    if(!isWebsiteExists && websites.size() ==0 ) {
                        websites.add("No Website Available");
                    }
-
-//                   for(int j =0; j< doctorJSON.getJSONArray("practices").length(); j++) {
-//                       JSONObject practice = doctorJSON.getJSONArray("practices").getJSONObject(i);
-//                       if(practice.getJSONArray("phones") != null) {
-//                           boolean isPhoneExists = false;
-//
-//                           for(int k =0; k< practice.getJSONArray("phones").length(); k++) {
-//
-//                                if(practice.getJSONArray("phones") != null ) {
-//                                    JSONObject phone = practice.getJSONArray("phones").getJSONObject(k);
-//                                    if (phone != null) {
-//                                        isPhoneExists = true;
-//                                        String phoneNumber = phone.get("number").toString();
-//                                        String type = phone.get("type").toString();
-//                                        phones.put(type, phoneNumber);
-//                                    }
-//                                }
-//                           }
-//
-//                           if(!isPhoneExists && phones.size() ==0 ) {
-//                               phones.put("Phone#" ,"Phone# is not Available!");
-//                           }
-//
-//                       }
-//
-//
-//                   }
-
                }
 
                 Doctor doctor = new Doctor(uuid, firstName, lastName, title,
