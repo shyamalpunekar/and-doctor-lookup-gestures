@@ -24,6 +24,16 @@ _An Android application where users may enter a name of doctor into a form, subm
 | The user should be able to navigate between Home Page and doctor list page |  |  |
 
 # Screenshots
+![image of blank input](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/blank-input.png)
+![image of blank output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/blank-input-error-message.png)
+
+![image of doctor list input name](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/input-name-mi.png)
+![image of doctor list output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/DoctorList.png)
+![image of doctor detail output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/DoctorDetails.png)
+
+
+![image of invalid input number](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/invalid-number-input.png)
+![image of invalid output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/invalid-input-display-message.png)
 
 
 
