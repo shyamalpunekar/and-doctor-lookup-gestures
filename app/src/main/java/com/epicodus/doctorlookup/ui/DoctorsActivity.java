@@ -1,6 +1,7 @@
 package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,28 +41,6 @@ public class DoctorsActivity extends AppCompatActivity {
     private DoctorListAdapter mAdapter;
     public ArrayList<Doctor> mDoctors = new ArrayList<>();
 
-    private String[] doctors = new String[]{"Jay Bell", "Dan Bell", "Amy Bell", "Bel Kis",
-            "Angela Bell", "Lori Day", "Julianne", "Mary Balson", "Ashley", "Troy", "Kandi",
-            "Pamela John", "Anup's Belur", "Nella Bello", "Belinda Bells"};
-
-    private String[] information = new String[]{"Specializes in your and your family's health",
-            "Specializes in physical therapy",
-            "Specializes in the care of the female reproductive system",
-            "Specializes in imaging via X-rays and ultrasound.", "Specializes in vision and " +
-            "prescribing glasses and contact lenses",
-            "Specializes in physical therapy",
-            "Specializes in managing pain and anesthesia in surgeries",
-            "Specializes in physical therapy.",
-            "Physical therapist assistants are skilled health care providers ",
-            " An occupational therapist is a person who has graduated from an entry-level " +
-                    "occupational therapy program accredited by the Accreditation Council for " +
-                    "Occupational Therapy Education (ACOTE) or predecessor organizations",
-            "Description is unavailable", "Specializes in managing pain and anesthesia in " +
-            "surgeries", "Specializes in physical therapy.", "Specializes in teeth and oral health",
-            "An occupational therapist is a person who has graduated from an entry-level" +
-                    " occupational therapy program accredited by the Accreditation Council for" +
-                    " Occupational Therapy Education (ACOTE) or predecessor organizations"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +48,7 @@ public class DoctorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctors);
 
         ButterKnife.bind(this);
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors);
-
-        MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors, information);
+        MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,9 +64,11 @@ public class DoctorsActivity extends AppCompatActivity {
 
 
         getDoctors(name);
-        if(mDoctors.size() ==0) {
 
-
+        if (mDoctors.size() == 0){
+            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("No Doctor found!");
+            dlgAlert.create().show();
         }
 
     }
@@ -97,38 +76,39 @@ public class DoctorsActivity extends AppCompatActivity {
     private void getDoctors(String name) {
         final BetterdoctorService betterdoctorService = new BetterdoctorService();
 
-            betterdoctorService.findRDoctors(name, new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.w("MyTag", "requestFailed");
+        betterdoctorService.findRDoctors(name, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.w("MyTag", "requestFailed");
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                try {
+
+                    mDoctors = betterdoctorService.processResults(response);
+                    DoctorsActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
+                            mRecyclerView.setAdapter(mAdapter);
+                            RecyclerView.LayoutManager layoutManager =
+                                    new LinearLayoutManager(DoctorsActivity.this);
+                            mRecyclerView.setLayoutManager(layoutManager);
+                            mRecyclerView.setHasFixedSize(true);
+
+                        }
+                    });
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
 
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-
-                    try {
-                            Log.v(TAG, response.body().string());
-                            mDoctors = betterdoctorService.processResults(response);
-                            DoctorsActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
-                                mRecyclerView.setAdapter(mAdapter);
-                                RecyclerView.LayoutManager layoutManager =
-                                        new LinearLayoutManager(DoctorsActivity.this);
-                                mRecyclerView.setLayoutManager(layoutManager);
-                                mRecyclerView.setHasFixedSize(true);
-
-                            }
-                        });
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            });
-        }
+        });
+    }
 
 }

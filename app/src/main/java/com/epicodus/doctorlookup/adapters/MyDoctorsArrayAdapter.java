@@ -15,11 +15,11 @@ public class MyDoctorsArrayAdapter extends ArrayAdapter{
 
     private List<Doctor> mDoctors;
     private String[] mInformation;
-    public MyDoctorsArrayAdapter(Context mContext, int resource, List<Doctor> mDoctors, String[] mInformation) {
+    public MyDoctorsArrayAdapter(Context mContext, int resource, List<Doctor> mDoctors) {
         super(mContext, resource);
         this.mContext = mContext;
         this.mDoctors = mDoctors;
-        this.mInformation = mInformation;
+
     }
 
     @Override

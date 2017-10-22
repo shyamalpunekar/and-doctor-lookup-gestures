@@ -2,6 +2,7 @@ package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,10 +46,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (v == mFindDoctorsButton) {
 
                 String name = mLocationEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
-                intent.putExtra("name", name);
 
-                startActivity(intent);
+                if (name.equals("") || name == null ){
+
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+                    dlgAlert.setMessage("Please enter valid Name");
+                    dlgAlert.create().show();
+
+                }
+                else {
+                    Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
+                    intent.putExtra("name", name);
+
+                    startActivity(intent);
+                }
 
             }
         }
