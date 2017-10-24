@@ -2,6 +2,7 @@ package com.epicodus.doctorlookup.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
     public DoctorListAdapter(Context context, ArrayList<Doctor> Doctors) {
         mContext = context;
         mDoctors = Doctors;
+
     }
 
     @Override

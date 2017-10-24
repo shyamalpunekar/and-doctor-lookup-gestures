@@ -62,14 +62,9 @@ public class DoctorsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
 
-
         getDoctors(name);
 
-        if (mDoctors.size() == 0){
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-            dlgAlert.setMessage("No Doctor found!");
-            dlgAlert.create().show();
-        }
+
 
     }
 
@@ -89,10 +84,13 @@ public class DoctorsActivity extends AppCompatActivity {
                 try {
 
                     mDoctors = betterdoctorService.processResults(response);
+
                     DoctorsActivity.this.runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
+
+
                             mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
                             mRecyclerView.setAdapter(mAdapter);
                             RecyclerView.LayoutManager layoutManager =
@@ -100,15 +98,21 @@ public class DoctorsActivity extends AppCompatActivity {
                             mRecyclerView.setLayoutManager(layoutManager);
                             mRecyclerView.setHasFixedSize(true);
 
+
                         }
+
                     });
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
+
+
                 }
             }
 
         });
+
     }
 
 }

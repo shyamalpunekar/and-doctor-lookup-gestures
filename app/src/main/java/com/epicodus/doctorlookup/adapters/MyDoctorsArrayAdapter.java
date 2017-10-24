@@ -27,6 +27,7 @@ public class MyDoctorsArrayAdapter extends ArrayAdapter{
         Doctor doctor = mDoctors.get(position);
         String information = mInformation[position];
         //return String.format("%s \nServes great: %s", doctor.getFirstName(), information);
+
         return doctor;
     }
 
