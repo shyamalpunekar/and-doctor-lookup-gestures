@@ -104,20 +104,18 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
         mAddressLabel.setText("Address: " + mDoctor.getPractices().get(0).getVisitAddress().toString());
 
         mWebsiteLabel.setOnClickListener(this);
+        mPhoneLabel.setOnClickListener(this);
 
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        if (v == mWebsiteLabel) {
-            Intent webIntent;
 
-                webIntent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(String.valueOf(mDoctor.getWebsites().contains(mWebsiteLabel))));
-
-                startActivity(webIntent);
-
+        if (v == mPhoneLabel) {
+            Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
+                    Uri.parse("tel:" + mDoctor.getPhones().toString()));
+            startActivity(phoneIntent);
         }
     }
 

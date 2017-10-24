@@ -87,7 +87,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
             mTitleTextView.setText("Title: " + doctor.getTitle());
             mFirstNameTextView.setText("First Name: " + doctor.getFirstName());
             mLastNameTextView.setText("Last Name: " +doctor.getLastName());
-            mPhoneTextView.setText("Phones: " + doctor.getPhones().toString());
+            mPhoneTextView.setText("Phones: " + doctor.getPhones());
             mWebsiteTextView.setText("Websites:" + doctor.getWebsites().toString());
             if(doctor.isAccepts_new_patients()){
                 mAcceptsPatients.setText("Accepts new Patients: " + "Yes");
