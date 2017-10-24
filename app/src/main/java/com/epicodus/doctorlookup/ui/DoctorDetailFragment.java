@@ -114,7 +114,7 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
 
         if (v == mPhoneLabel) {
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
-                    Uri.parse("tel:" + mDoctor.getPhones().toString()));
+                    Uri.parse("tel:" + mDoctor.getPhones()));
             startActivity(phoneIntent);
         }
     }
