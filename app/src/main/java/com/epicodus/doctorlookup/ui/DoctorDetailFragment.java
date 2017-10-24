@@ -1,6 +1,8 @@
 package com.epicodus.doctorlookup.ui;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,7 +29,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DoctorDetailFragment extends Fragment {
+public class DoctorDetailFragment extends Fragment implements View.OnClickListener {
 
 //    @Bind(R.id.doctorImageView)
 //    ImageView mImageLabel;
@@ -50,12 +53,6 @@ public class DoctorDetailFragment extends Fragment {
     TextView mSaveRestaurantButton;
     @Bind(R.id.doctorAcceptsPatientsTextView)
     TextView mAcceptsPatients;
-
-
-
-
-
-
 
     private Doctor mDoctor;
     private RecyclerView.Adapter mAdapter;
@@ -92,6 +89,7 @@ public class DoctorDetailFragment extends Fragment {
         mNameLabel.setText("First Name: " + mDoctor.getFirstName());
         mLastName.setText("Last Name: " + mDoctor.getLastName());
 
+
         if(mDoctor.isAccepts_new_patients()){
             mAcceptsPatients.setText("Accepts new Patients: " + "Yes");
         }
@@ -101,10 +99,26 @@ public class DoctorDetailFragment extends Fragment {
 
         mAdapter = new DoctorListAdapter(getActivity().getApplicationContext(),doctors);
 
-        mPhoneLabel.setText("Phones: " +mDoctor.getPhones().toString());
-        mWebsiteLabel.setText("Websites: " +mDoctor.getWebsites().toString());
+        mPhoneLabel.setText("Phones: " + mDoctor.getPhones().toString());
+        mWebsiteLabel.setText("Websites: " + mDoctor.getWebsites());
         mAddressLabel.setText("Address: " + mDoctor.getPractices().get(0).getVisitAddress().toString());
+
+        mWebsiteLabel.setOnClickListener(this);
+
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mWebsiteLabel) {
+            Intent webIntent;
+
+                webIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(String.valueOf(mDoctor.getWebsites().contains(mWebsiteLabel))));
+
+                startActivity(webIntent);
+
+        }
     }
 
 }
