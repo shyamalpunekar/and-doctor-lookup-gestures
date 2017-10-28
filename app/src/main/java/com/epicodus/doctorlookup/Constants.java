@@ -19,5 +19,7 @@ public class Constants {
     public static final String DOCTOR_USERLOCATION_QUERY_PARAMETER = "user_location";
     public static final String DOCTOR_USERKEY_QUERY_PARAMETER = "user_location";
 
+    public static final String PREFERENCES_LOCATION_KEY = "name";
+
 
 }

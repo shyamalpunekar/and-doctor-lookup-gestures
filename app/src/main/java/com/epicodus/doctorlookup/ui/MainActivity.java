@@ -1,23 +1,26 @@
 package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
-
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     @Bind(R.id.findDoctorsButton)
     Button mFindDoctorsButton;
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/ostrich-regular.ttf");
         mAppNameTextView.setTypeface(ostrichFont);
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
         mFindDoctorsButton.setOnClickListener(this);
     }
 
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (v == mFindDoctorsButton) {
 
                 String name = mLocationEditText.getText().toString();
+                addToSharedPreferences(name);
 
                 if (name.equals("") || name == null ){
 
@@ -64,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         }
+
+    private void addToSharedPreferences(String name) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, name).apply();
+    }
 
 
     }
