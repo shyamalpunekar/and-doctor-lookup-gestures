@@ -1,9 +1,7 @@
 package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
 import com.epicodus.doctorlookup.adapters.MyDoctorsArrayAdapter;
@@ -42,8 +39,8 @@ public class DoctorsActivity extends AppCompatActivity {
     private DoctorListAdapter mAdapter;
     public ArrayList<Doctor> mDoctors = new ArrayList<>();
 
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
+   // private SharedPreferences mSharedPreferences;
+   // private String mRecentAddress;
 
 
     @Override
@@ -63,11 +60,11 @@ public class DoctorsActivity extends AppCompatActivity {
             }
         });
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            getDoctors(mRecentAddress);
-        }
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        if (mRecentAddress != null) {
+//            getDoctors(mRecentAddress);
+//        }
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
