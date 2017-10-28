@@ -23,7 +23,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.doctorlookup.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.DoctorDetailActivity"></activity>
+        <activity android:name=".ui.DoctorDetailActivity" />
+        <activity android:name=".ui.SavedDoctorListActivity"></activity>
     </application>
 
 </manifest>
