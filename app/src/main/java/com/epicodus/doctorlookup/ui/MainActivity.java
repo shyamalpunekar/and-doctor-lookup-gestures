@@ -23,8 +23,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    //private SharedPreferences mSharedPreferences;
-    //private SharedPreferences.Editor mEditor;
 
     private DatabaseReference mSearchedNameReference;
 
@@ -88,15 +86,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //
                 saveNameToFirebase(name);
-                //add sharedPreference
-//                if(!(name).equals("")) {
-//                    addToSharedPreferences(name);
-//                }
 
-//                if (v == mSavedDoctorsButton) {
-//                    Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
-//                    startActivity(intent);
-//                }
+
+                if (v == mSavedDoctorsButton) {
+                    Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
+                    startActivity(intent);
+                }
 
                 if (name.equals("") || name == null ){
 
@@ -128,11 +123,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchedNameReference.removeEventListener(mSearchedNameReferenceListener);
     }
 
-
-//    private void addToSharedPreferences(String name) {
-//        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, name).apply();
-//    }
-
-
-    }
+}
 

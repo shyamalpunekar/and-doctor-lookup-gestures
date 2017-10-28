@@ -1,16 +1,24 @@
 package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
 import com.epicodus.doctorlookup.adapters.MyDoctorsArrayAdapter;
@@ -40,8 +48,9 @@ public class DoctorsActivity extends AppCompatActivity {
     private DoctorListAdapter mAdapter;
     public List<Doctor> mDoctors = new ArrayList<>();
 
-   // private SharedPreferences mSharedPreferences;
-   // private String mRecentAddress;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentAddress;
 
 
     @Override
@@ -69,11 +78,51 @@ public class DoctorsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-
         getDoctors(name);
-
-
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                addToSharedPreferences(query);
+                getDoctors(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    // add addToSharedPreferences to write data
+        private void addToSharedPreferences(String name) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, name).apply();
+    }
+
+
 
     private void getDoctors(String name) {
         final BetterdoctorService betterdoctorService = new BetterdoctorService();
