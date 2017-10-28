@@ -2,9 +2,7 @@ package com.epicodus.doctorlookup.models;
 
 import org.parceler.Parcel;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by spuek on 10/20/17.
@@ -14,6 +12,7 @@ public class Practice {
     private String website;
     private Map<String, String> phones;
     private Map<String, String> visitAddress;
+
 
     public String getWebsite() {
         return website;

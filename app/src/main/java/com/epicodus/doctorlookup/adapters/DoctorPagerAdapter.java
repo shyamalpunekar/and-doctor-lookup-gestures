@@ -1,7 +1,5 @@
 package com.epicodus.doctorlookup.adapters;
 
-import android.support.v4.app.FragmentPagerAdapter;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.epicodus.doctorlookup.models.Doctor;
 import com.epicodus.doctorlookup.ui.DoctorDetailFragment;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,9 +15,9 @@ import java.util.ArrayList;
  */
 
 public class DoctorPagerAdapter extends FragmentPagerAdapter{
-    private ArrayList<Doctor> mDoctors;
+    private List<Doctor> mDoctors;
 
-    public DoctorPagerAdapter(FragmentManager fm, ArrayList<Doctor> doctors) {
+    public DoctorPagerAdapter(FragmentManager fm, List<Doctor> doctors) {
         super(fm);
         mDoctors = doctors;
     }

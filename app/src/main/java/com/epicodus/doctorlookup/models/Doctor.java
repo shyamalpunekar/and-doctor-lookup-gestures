@@ -1,9 +1,9 @@
 package com.epicodus.doctorlookup.models;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import org.parceler.Parcel;
 
 /**
  * Created by spuek on 10/19/17.
@@ -16,14 +16,14 @@ public class Doctor {
     private String firstName;
     private String lastName;
     private String title;
-    private Set<String> websites;
+    private List<String> websites;
     private Map<String, String> phones;
     private List<Practice> practices;
     private boolean accepts_new_patients;
 
     public Doctor(){}
 
-    public Doctor(String uuid, String firstName, String lastName, String title, Set<String> websites, Map<String, String> phones, List<Practice> practices, boolean accepts_new_patients) {
+    public Doctor(String uuid, String firstName, String lastName, String title, List<String> websites, Map<String, String> phones, List<Practice> practices, boolean accepts_new_patients) {
         this.uuid = uuid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -77,11 +77,11 @@ public class Doctor {
     }
 
 
-    public Set<String> getWebsites() {
+    public List<String> getWebsites() {
         return websites;
     }
 
-    public void setWebsites(Set<String> websites) {
+    public void setWebsites(List<String> websites) {
         this.websites = websites;
     }
 

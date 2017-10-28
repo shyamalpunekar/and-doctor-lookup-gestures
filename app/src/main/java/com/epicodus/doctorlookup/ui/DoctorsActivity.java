@@ -19,6 +19,7 @@ import com.epicodus.doctorlookup.services.BetterdoctorService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,7 +38,7 @@ public class DoctorsActivity extends AppCompatActivity {
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     private DoctorListAdapter mAdapter;
-    public ArrayList<Doctor> mDoctors = new ArrayList<>();
+    public List<Doctor> mDoctors = new ArrayList<>();
 
    // private SharedPreferences mSharedPreferences;
    // private String mRecentAddress;

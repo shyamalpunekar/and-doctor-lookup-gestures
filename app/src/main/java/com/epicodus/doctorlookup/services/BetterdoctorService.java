@@ -143,9 +143,9 @@ public class BetterdoctorService {
                        websites.add("No Website Available");
                    }
                }
-
+List<String>  websitesList = new ArrayList<>(websites);
                 Doctor doctor = new Doctor(uuid, firstName, lastName, title,
-                         websites, phones, practices,accepts_new_patients);
+                websitesList, phones, practices,accepts_new_patients);
                 doctors.add(doctor);
             }
         }

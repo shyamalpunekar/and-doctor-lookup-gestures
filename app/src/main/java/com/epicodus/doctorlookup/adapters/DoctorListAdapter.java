@@ -16,6 +16,7 @@ import com.epicodus.doctorlookup.ui.DoctorDetailActivity;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,11 +26,11 @@ import butterknife.ButterKnife;
  */
 
 public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.DoctorViewHolder> {
-    private ArrayList<Doctor> mDoctors = new ArrayList<>();
+    private List<Doctor> mDoctors = new ArrayList<>();
     private Context mContext;
 
 
-    public DoctorListAdapter(Context context, ArrayList<Doctor> Doctors) {
+    public DoctorListAdapter(Context context, List<Doctor> Doctors) {
         mContext = context;
         mDoctors = Doctors;
 

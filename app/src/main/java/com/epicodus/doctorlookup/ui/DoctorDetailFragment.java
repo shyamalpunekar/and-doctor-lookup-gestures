@@ -9,19 +9,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
 import com.epicodus.doctorlookup.models.Doctor;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,9 +51,10 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
     @Bind(R.id.addressTextView)
     TextView mAddressLabel;
     @Bind(R.id.saveDoctorButton)
-    TextView mSaveRestaurantButton;
+    TextView mSaveDoctorButton;
     @Bind(R.id.doctorAcceptsPatientsTextView)
     TextView mAcceptsPatients;
+
 
     private Doctor mDoctor;
     private RecyclerView.Adapter mAdapter;
@@ -80,7 +82,7 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_doctor_detail, container, false);
         ButterKnife.bind(this, view);
-        ArrayList<Doctor> doctors = new ArrayList<>();
+        List<Doctor> doctors = new ArrayList<>();
 
         doctors.add(mDoctor);
     //   Picasso.with(view.getContext()).load(mDoctor.getImageUrl()).into(mImageLabel);
@@ -105,6 +107,7 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
 
         mWebsiteLabel.setOnClickListener(this);
         mPhoneLabel.setOnClickListener(this);
+        mSaveDoctorButton.setOnClickListener(this);
 
         return view;
     }
@@ -116,6 +119,15 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
                     Uri.parse("tel:" + mDoctor.getPhones()));
             startActivity(phoneIntent);
+        }
+
+        if (v == mSaveDoctorButton) {
+            DatabaseReference doctorRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_DOCTORS);
+
+            doctorRef.push().setValue(mDoctor);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 
