@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "334938965188",
+    "firebase_url": "https://doctorlookup.firebaseio.com",
+    "project_id": "doctorlookup",
+    "storage_bucket": "doctorlookup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334938965188:android:0b0954579d816199",
+        "android_client_info": {
+          "package_name": "com.epicodus.doctorlookup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334938965188-g7aduschrq6tj00rops2mm6ou1rqpbhc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epicodus.doctorlookup",
+            "certificate_hash": "6cff3f7984962966037d699359011108472ded3d"
+          }
+        },
+        {
+          "client_id": "334938965188-kjdt07s2oe84dbgudo2fiqfr7hnvb7mb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2Vd2gImETfOq5mNTkBUpqP6HasU5mdUk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334938965188-kjdt07s2oe84dbgudo2fiqfr7hnvb7mb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

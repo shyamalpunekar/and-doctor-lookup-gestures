@@ -52,12 +52,6 @@ public class DoctorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctors);
 
         ButterKnife.bind(this);
-
-        //Add shared preferences
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        Log.d("Shared Pref Location", mRecentAddress);
-
         MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors);
         mListView.setAdapter(adapter);
 
@@ -69,11 +63,16 @@ public class DoctorsActivity extends AppCompatActivity {
             }
         });
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        if (mRecentAddress != null) {
+            getDoctors(mRecentAddress);
+        }
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
 
         getDoctors(name);
-
 
 
     }

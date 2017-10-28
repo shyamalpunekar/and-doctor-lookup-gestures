@@ -52,7 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (v == mFindDoctorsButton) {
 
                 String name = mLocationEditText.getText().toString();
-                addToSharedPreferences(name);
+                //add sharedPreference
+                if(!(name).equals("")) {
+                    addToSharedPreferences(name);
+                }
 
                 if (name.equals("") || name == null ){
 
