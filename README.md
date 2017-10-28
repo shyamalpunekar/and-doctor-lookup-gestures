@@ -1,8 +1,8 @@
-# Doctor Lookup Website Android Independent Project
+# Doctor Lookup Android Independent Project
 
 #### Doctor Lookup Application, October 20 2017
 
-##### Usage - Web Service Backends and Custom Fragments 
+##### Usage -  Firebase user registration, authentication. 
 
 #### By Shyamal Punekar
 
@@ -12,8 +12,10 @@ _An Android application where users may enter a name of doctor into a form, subm
 
 ## Setup/Installation Requirements
 * Open Android Studio
-* Run MainActivity to launch the application
-* Use the application to see list of doctors in your city by entering zip code in the form.
+* Run MainActivity to launch the application 
+* Firebase user authentication
+* saving and retrieving data to Firebase
+* Use the application to see list of doctors in your city by entering name in the form.
 
 ## Specifications
 
@@ -24,21 +26,18 @@ _An Android application where users may enter a name of doctor into a form, subm
 | The user should be able to navigate between Home Page and doctor list page |  |  |
 
 # Screenshots
-![image of blank input](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/blank-input.png)
-![image of blank output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/blank-input-error-message.png)
+![image of blank input]()
+![image of blank output]()
 
-![image of doctor list input name](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/input-name-mi.png)
-![image of doctor list output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/DoctorList.png)
-![image of doctor detail output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/DoctorDetails.png)
+![image of doctor list input name]()
+![image of doctor list output]()
+![image of doctor detail output]()
 
-
-![image of invalid input number](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/invalid-number-input.png)
-![image of invalid output](https://github.com/shyamalpunekar/doctor-lookup/blob/master/screenshots/invalid-input-display-message.png)
-
+![image of invalid input number]()
 
 
 # Setup
-  https://github.com/shyamalpunekar/doctor-lookup
+  https://github.com/shyamalpunekar/and-doctor-lookup-firebase
 
 # Support and contact details
 
@@ -48,12 +47,13 @@ _There are no known bugs at this time!_
 
 ## Technologies Used
 
-* Android
+* Android Emulator
 * Android Studio
 * xml
 * Java
 * Postman
 * Doctor API
+* Firebase Authentication
 
 
 ### License
