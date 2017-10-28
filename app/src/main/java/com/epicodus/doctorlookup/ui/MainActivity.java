@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 
 import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //private SharedPreferences.Editor mEditor;
 
     private DatabaseReference mSearchedNameReference;
+
+    private ValueEventListener mSearchedNameReferenceListener;
 
     @Bind(R.id.findDoctorsButton)
     Button mFindDoctorsButton;
@@ -38,6 +44,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_NAME);
+
+        mSearchedNameReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot nameSnapshot : dataSnapshot.getChildren()) {
+                    String name = nameSnapshot.getValue().toString();
+                    Log.d("Names updated", "name: " + name); //log
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -89,6 +110,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void saveNameToFirebase(String name) {
         mSearchedNameReference.push().setValue(name);
     }
+
+
+    //destroy app when user quits the activity
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedNameReference.removeEventListener(mSearchedNameReferenceListener);
+    }
+
 
 //    private void addToSharedPreferences(String name) {
 //        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, name).apply();
