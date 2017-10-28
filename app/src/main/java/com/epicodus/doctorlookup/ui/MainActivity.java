@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     public void saveNameToFirebase(String name) {
-        mSearchedNameReference.setValue(name);
+        mSearchedNameReference.push().setValue(name);
     }
 
 //    private void addToSharedPreferences(String name) {
