@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ValueEventListener mSearchedNameReferenceListener;
 
+    @Bind(R.id.savedDoctorsButton) Button mSavedDoctorsButton;
+
     @Bind(R.id.findDoctorsButton)
     Button mFindDoctorsButton;
     @Bind(R.id.locationEditText)
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_NAME);
+
+//        mSavedDoctorsButton.setOnClickListener(this);
 
         mSearchedNameReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -85,9 +89,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //
                 saveNameToFirebase(name);
                 //add sharedPreference
-                if(!(name).equals("")) {
-                  //  addToSharedPreferences(name);
-                }
+//                if(!(name).equals("")) {
+//                    addToSharedPreferences(name);
+//                }
+
+//                if (v == mSavedDoctorsButton) {
+//                    Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
+//                    startActivity(intent);
+//                }
 
                 if (name.equals("") || name == null ){
 
