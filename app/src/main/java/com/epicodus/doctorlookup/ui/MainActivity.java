@@ -1,10 +1,8 @@
 package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,13 +12,17 @@ import android.widget.TextView;
 
 import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+    //private SharedPreferences mSharedPreferences;
+    //private SharedPreferences.Editor mEditor;
+
+    private DatabaseReference mSearchedNameReference;
 
     @Bind(R.id.findDoctorsButton)
     Button mFindDoctorsButton;
@@ -31,6 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mSearchedNameReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_SEARCHED_NAME);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -40,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/ostrich-regular.ttf");
         mAppNameTextView.setTypeface(ostrichFont);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
+       // mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+       // mEditor = mSharedPreferences.edit();
 
         mFindDoctorsButton.setOnClickListener(this);
     }
@@ -52,9 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (v == mFindDoctorsButton) {
 
                 String name = mLocationEditText.getText().toString();
+
+                //
+                saveNameToFirebase(name);
                 //add sharedPreference
                 if(!(name).equals("")) {
-                    addToSharedPreferences(name);
+                  //  addToSharedPreferences(name);
                 }
 
                 if (name.equals("") || name == null ){
@@ -75,9 +86,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-    private void addToSharedPreferences(String name) {
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, name).apply();
+    public void saveNameToFirebase(String name) {
+        mSearchedNameReference.setValue(name);
     }
+
+//    private void addToSharedPreferences(String name) {
+//        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, name).apply();
+//    }
 
 
     }
