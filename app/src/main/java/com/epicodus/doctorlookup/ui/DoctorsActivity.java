@@ -1,9 +1,10 @@
 package com.epicodus.doctorlookup.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,20 +13,20 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.epicodus.doctorlookup.adapters.MyDoctorsArrayAdapter;
+import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
+import com.epicodus.doctorlookup.adapters.MyDoctorsArrayAdapter;
 import com.epicodus.doctorlookup.models.Doctor;
 import com.epicodus.doctorlookup.services.BetterdoctorService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Response;
 
 public class DoctorsActivity extends AppCompatActivity {
@@ -41,6 +42,9 @@ public class DoctorsActivity extends AppCompatActivity {
     private DoctorListAdapter mAdapter;
     public ArrayList<Doctor> mDoctors = new ArrayList<>();
 
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,12 @@ public class DoctorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctors);
 
         ButterKnife.bind(this);
+
+        //Add shared preferences
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        Log.d("Shared Pref Location", mRecentAddress);
+
         MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors);
         mListView.setAdapter(adapter);
 

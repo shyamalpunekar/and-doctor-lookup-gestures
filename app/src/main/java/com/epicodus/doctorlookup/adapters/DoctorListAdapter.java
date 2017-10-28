@@ -2,7 +2,6 @@ package com.epicodus.doctorlookup.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.epicodus.doctorlookup.ui.DoctorDetailActivity;
-import com.epicodus.doctorlookup.ui.DoctorsActivity;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.models.Doctor;
-import java.util.ArrayList;
+import com.epicodus.doctorlookup.ui.DoctorDetailActivity;
+
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.DoctorViewHolder> {
     private ArrayList<Doctor> mDoctors = new ArrayList<>();
     private Context mContext;
+
 
     public DoctorListAdapter(Context context, ArrayList<Doctor> Doctors) {
         mContext = context;
