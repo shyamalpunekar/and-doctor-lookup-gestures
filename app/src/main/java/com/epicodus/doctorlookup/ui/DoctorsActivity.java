@@ -39,6 +39,10 @@ public class DoctorsActivity extends AppCompatActivity {
 
     public static final String TAG = DoctorsActivity.class.getSimpleName();
 
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentAddress;
+
     @Bind(R.id.nameTextView)
     TextView mNameTextView;
     @Bind(R.id.listView)
@@ -48,9 +52,6 @@ public class DoctorsActivity extends AppCompatActivity {
     private DoctorListAdapter mAdapter;
     public List<Doctor> mDoctors = new ArrayList<>();
 
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private String mRecentAddress;
 
 
     @Override
@@ -70,15 +71,19 @@ public class DoctorsActivity extends AppCompatActivity {
             }
         });
 
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-//        if (mRecentAddress != null) {
-//            getDoctors(mRecentAddress);
-//        }
-
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
+
         getDoctors(name);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        if (mRecentAddress != null) {
+            getDoctors(mRecentAddress);
+        }
+
+
     }
 
     @Override

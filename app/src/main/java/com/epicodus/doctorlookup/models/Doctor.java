@@ -21,6 +21,8 @@ public class Doctor {
     private List<Practice> practices;
     private boolean accepts_new_patients;
     private List<Specialty> specialties;
+    private String pushId;
+
 
     public Doctor(){}
 
@@ -110,5 +112,13 @@ public class Doctor {
 
     public void setSpecialties(List<Specialty> specialties) {
         this.specialties = specialties;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }

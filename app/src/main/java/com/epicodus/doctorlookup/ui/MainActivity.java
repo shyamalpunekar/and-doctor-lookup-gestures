@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.epicodus.doctorlookup.R;
@@ -33,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Bind(R.id.findDoctorsButton)
     Button mFindDoctorsButton;
-    @Bind(R.id.locationEditText)
-    EditText mLocationEditText;
+//    @Bind(R.id.locationEditText)
+//    EditText mLocationEditText;
     @Bind(R.id.appNameTextView)
     TextView mAppNameTextView;
 
@@ -142,11 +140,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View v) {
 
             if (v == mFindDoctorsButton) {
+                Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
+                startActivity(intent);
+            }
 
-                String name = mLocationEditText.getText().toString();
+               // String name = mLocationEditText.getText().toString();
 
 
-                saveNameToFirebase(name);
+               // saveNameToFirebase(name);
 
 
                 if (v == mSavedDoctorsButton) {
@@ -154,23 +155,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 }
 
-                if (name.equals("") || name == null ){
-
-                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-                    dlgAlert.setMessage("Please enter valid Name");
-                    dlgAlert.create().show();
-                    return;
-
-                }
-                else {
-                    Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
-                    intent.putExtra("name", name);
-
-                    startActivity(intent);
-                }
+//                if (name.equals("") || name == null ){
+//
+//                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+//                    dlgAlert.setMessage("Please enter valid Name");
+//                    dlgAlert.create().show();
+//                    return;
+//
+//                }
+//                else {
+//                    Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
+//                    intent.putExtra("name", name);
+//
+//                    startActivity(intent);
+//                }
 
             }
-        }
+
 
     public void saveNameToFirebase(String name) {
         mSearchedNameReference.push().setValue(name);
@@ -178,11 +179,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     //destroy app when user quits the activity
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mSearchedNameReference.removeEventListener(mSearchedNameReferenceListener);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mSearchedNameReference.removeEventListener(mSearchedNameReferenceListener);
+//    }
 
 }
 

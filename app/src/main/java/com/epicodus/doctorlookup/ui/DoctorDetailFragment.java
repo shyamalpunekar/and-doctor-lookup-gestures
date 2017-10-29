@@ -16,6 +16,8 @@ import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
 import com.epicodus.doctorlookup.models.Doctor;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -122,11 +124,20 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
         }
 
         if (v == mSaveDoctorButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+
             DatabaseReference doctorRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_DOCTORS);
+                    .getReference(Constants.FIREBASE_CHILD_DOCTORS)
+                    .child(uid);
 
-            doctorRef.push().setValue(mDoctor);
+            DatabaseReference pushRef = doctorRef.push();
+            String pushId = pushRef.getKey();
+            mDoctor.setPushId(pushId);
+            pushRef.setValue(mDoctor);
+
+            //doctorRef.push().setValue(mDoctor);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }

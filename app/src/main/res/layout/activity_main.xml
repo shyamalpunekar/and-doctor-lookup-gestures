@@ -23,16 +23,16 @@
         android:layout_marginTop="35dp"
         />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/locationEditText"
-        android:background="@color/colorTextIcons"
-        android:layout_marginBottom="28dp"
-        android:padding="5dp"
-        android:hint="Enter Doctor's Name"
-        android:layout_above="@+id/findDoctorsButton"
-        android:layout_centerHorizontal="true" />
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/locationEditText"-->
+        <!--android:background="@color/colorTextIcons"-->
+        <!--android:layout_marginBottom="28dp"-->
+        <!--android:padding="5dp"-->
+        <!--android:hint="Enter Doctor's Name"-->
+        <!--android:layout_above="@+id/findDoctorsButton"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
     <Button
         android:layout_width="match_parent"
