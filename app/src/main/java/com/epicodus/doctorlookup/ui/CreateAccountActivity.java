@@ -1,5 +1,6 @@
 package com.epicodus.doctorlookup.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,6 +40,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private String mName;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private ProgressDialog mAuthProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,8 +51,16 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mAuth = FirebaseAuth.getInstance();
         mLoginTextView.setOnClickListener(this);
         mCreateUserButton.setOnClickListener(this);
+        createAuthProgressDialog();
 
+    }
 
+    //Add ProgressDialog
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
     }
 
     @Override
@@ -89,6 +100,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
         mName = mNameEditText.getText().toString().trim();
 
+        //call Validating Registration Credentials method in createNeUser method
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(name);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+        if (!validEmail || !validName || !validPassword) return;
+
+        mAuthProgressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
