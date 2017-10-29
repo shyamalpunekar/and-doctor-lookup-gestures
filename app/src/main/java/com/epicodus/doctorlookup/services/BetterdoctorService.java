@@ -3,6 +3,7 @@ package com.epicodus.doctorlookup.services;
 import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.models.Doctor;
 import com.epicodus.doctorlookup.models.Practice;
+import com.epicodus.doctorlookup.models.Specialty;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +61,7 @@ public class BetterdoctorService {
         try {
             String jsonData = response.body().string();
             JSONObject doctorJson = new JSONObject(jsonData);
+            List<Specialty> specialties = new ArrayList<>();
             JSONArray businessesJSON = doctorJson.getJSONArray("data");
             for (int i = 0; i < businessesJSON.length(); i++) {
                 JSONObject doctorJSON = businessesJSON.getJSONObject(i);
@@ -69,6 +71,11 @@ public class BetterdoctorService {
                 String firstName = doctorJSON.getJSONObject("profile").get("first_name").toString();
                 String lastName = doctorJSON.getJSONObject("profile").get("last_name").toString();
                 String title = doctorJSON.getJSONObject("profile").get("title").toString();;
+
+                String ratings = doctorJSON.getJSONObject("ratings").toString();;
+//                if(doctorJSON.getJSONObject("ratings").getJSONArray() {
+//
+//                }
                if(doctorJSON.getJSONArray("practices") != null ) {
                    boolean isWebsiteExists = false;
                    boolean isVisitAddress = false;
@@ -136,16 +143,48 @@ public class BetterdoctorService {
                            individualPractice.setVisitAddress(visitAddress);
                        }
 
-
                    }
 
                    if(!isWebsiteExists && websites.size() ==0 ) {
                        websites.add("No Website Available");
                    }
                }
+
+                if(doctorJSON.getJSONArray("specialties") != null ) {
+
+
+                    for (int j = 0; j < doctorJSON.getJSONArray("specialties").length(); j++) {
+                        Specialty individualSpecialty = new Specialty();
+                        JSONObject specialty = doctorJSON.getJSONArray("specialties").getJSONObject(j);
+
+                        if (!specialty.isNull("name")) {
+                            individualSpecialty.setName(specialty.get("name").toString());
+
+                        } else {
+                            individualSpecialty.setName("Name Not Available");
+                        }
+
+                        if (!specialty.isNull("actors")) {
+                            individualSpecialty.setActors(specialty.get("actors").toString());
+
+                        } else {
+                            individualSpecialty.setActors("Actors Not Available");
+                        }
+
+                        if (!specialty.isNull("category")) {
+                            individualSpecialty.setCategory(specialty.get("category").toString());
+
+                        } else {
+                            individualSpecialty.setCategory("category Not Available");
+                        }
+
+                        specialties.add(individualSpecialty);
+
+                    }
+                }
 List<String>  websitesList = new ArrayList<>(websites);
                 Doctor doctor = new Doctor(uuid, firstName, lastName, title,
-                websitesList, phones, practices,accepts_new_patients);
+                websitesList, phones, practices,accepts_new_patients, specialties);
                 doctors.add(doctor);
             }
         }

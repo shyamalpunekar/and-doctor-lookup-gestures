@@ -20,10 +20,12 @@ public class Doctor {
     private Map<String, String> phones;
     private List<Practice> practices;
     private boolean accepts_new_patients;
+    private List<Specialty> specialties;
 
     public Doctor(){}
 
-    public Doctor(String uuid, String firstName, String lastName, String title, List<String> websites, Map<String, String> phones, List<Practice> practices, boolean accepts_new_patients) {
+    public Doctor(String uuid, String firstName, String lastName, String title, List<String> websites, Map<String, String> phones, List<Practice> practices, boolean accepts_new_patients,
+                  List<Specialty> specialties) {
         this.uuid = uuid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,6 +34,7 @@ public class Doctor {
         this.phones = phones;
         this.practices = practices;
         this.accepts_new_patients = accepts_new_patients;
+        this.specialties = specialties;
 
     }
 
@@ -99,5 +102,13 @@ public class Doctor {
 
     public void setAccepts_new_patients(boolean accepts_new_patients) {
         this.accepts_new_patients = accepts_new_patients;
+    }
+
+    public List<Specialty> getSpecialties() {
+        return specialties;
+    }
+
+    public void setSpecialties(List<Specialty> specialties) {
+        this.specialties = specialties;
     }
 }

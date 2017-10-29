@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.epicodus.doctorlookup.ui.CreateAccountActivity"
+    tools:context="com.epicodus.doctorlookup.ui.LoginActivity"
     android:background="@color/colorPrimary">
 
     <LinearLayout
@@ -51,6 +51,7 @@
         android:background="@color/colorAccent"
         android:layout_marginTop="15dp"
         android:textColor="@color/colorTextIcons" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 saveNameToFirebase(name);
 
 
-                if (v == mSavedDoctorsButton) {
-                    Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
-                    startActivity(intent);
-                }
+//                if (v == mSavedDoctorsButton) {
+//                    Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
+//                    startActivity(intent);
+//                }
 
                 if (name.equals("") || name == null ){
 
