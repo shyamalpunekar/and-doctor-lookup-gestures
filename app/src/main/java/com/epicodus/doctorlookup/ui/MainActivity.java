@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,14 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import butterknife.Bind;
@@ -49,27 +44,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mSearchedNameReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_NAME);
+//        mSearchedNameReference = FirebaseDatabase
+//                .getInstance()
+//                .getReference()
+//                .child(Constants.FIREBASE_CHILD_SEARCHED_NAME);
 
 //        mSavedDoctorsButton.setOnClickListener(this);
 
-        mSearchedNameReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot nameSnapshot : dataSnapshot.getChildren()) {
-                    String name = nameSnapshot.getValue().toString();
-                    Log.d("Names updated", "name: " + name); //log
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        mSearchedNameReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot nameSnapshot : dataSnapshot.getChildren()) {
+//                    String name = nameSnapshot.getValue().toString();
+//                    Log.d("Names updated", "name: " + name); //log
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -100,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // mEditor = mSharedPreferences.edit();
 
         mFindDoctorsButton.setOnClickListener(this);
+        mSavedDoctorsButton.setOnClickListener(this);
     }
 
     @Override
@@ -149,14 +145,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String name = mLocationEditText.getText().toString();
 
-                //
+
                 saveNameToFirebase(name);
 
 
-//                if (v == mSavedDoctorsButton) {
-//                    Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
-//                    startActivity(intent);
-//                }
+                if (v == mSavedDoctorsButton) {
+                    Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
+                    startActivity(intent);
+                }
 
                 if (name.equals("") || name == null ){
 

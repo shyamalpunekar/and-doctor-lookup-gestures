@@ -50,6 +50,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_create_account);
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
+        createAuthStateListener();
         mLoginTextView.setOnClickListener(this);
         mCreateUserButton.setOnClickListener(this);
         createAuthProgressDialog();
