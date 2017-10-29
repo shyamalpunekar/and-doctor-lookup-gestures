@@ -38,6 +38,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     private FirebaseAuth mAuth;
     private String mName;
+
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private ProgressDialog mAuthProgressDialog;
@@ -55,13 +56,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    //Add ProgressDialog
-    private void createAuthProgressDialog() {
-        mAuthProgressDialog = new ProgressDialog(this);
-        mAuthProgressDialog.setTitle("Loading...");
-        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
-        mAuthProgressDialog.setCancelable(false);
-    }
 
     @Override
     public void onStart() {
@@ -102,7 +96,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         //call Validating Registration Credentials method in createNeUser method
         boolean validEmail = isValidEmail(email);
-        boolean validName = isValidName(name);
+        boolean validName = isValidName(mName);
         boolean validPassword = isValidPassword(password, confirmPassword);
         if (!validEmail || !validName || !validPassword) return;
 
@@ -112,6 +106,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuthProgressDialog.dismiss();
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Authentication successful");
                             createFirebaseUserProfile(task.getResult().getUser());
@@ -142,6 +137,30 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
                 });
     }
+
+    private void createAuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
+    }
+
+    //Add ProgressDialog
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
+    }
+
 
     //Validating Registration Credentials
     private boolean isValidEmail(String email) {
