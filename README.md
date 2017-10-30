@@ -26,12 +26,12 @@ _An Android application where users may enter a name of doctor into a form, subm
 | The user should be able to navigate between Home Page and doctor list page |  |  |
 
 # Screenshots
-![image of blank input]()
-![image of blank output]()
+![image of Doctor list-output]()
+![image of doctor forebase]()
 
-![image of doctor list input name]()
-![image of doctor list output]()
-![image of doctor detail output]()
+![image of doctor detail from user-account]()
+![image of user registration output]()
+![image of doctor login output]()
 
 ![image of invalid input number]()
 
