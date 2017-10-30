@@ -26,14 +26,14 @@ _An Android application where users may enter a name of doctor into a form, subm
 | The user should be able to navigate between Home Page and doctor list page |  |  |
 
 # Screenshots
-![image of Doctor list-output]()
-![image of doctor forebase]()
+![image of Doctor list-output](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/DoctorList.png)
+![image of doctor forebase](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/firebase-zink.png)
 
-![image of doctor detail from user-account]()
-![image of user registration output]()
-![image of doctor login output]()
+![image of doctor detail from user-account](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/doctor-details-zink-user1-saved.png)
+![image of user registration output](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/)
+![image of doctor login output](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/)
 
-![image of invalid input number]()
+![image of invalid input number](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/s)
 
 
 # Setup
