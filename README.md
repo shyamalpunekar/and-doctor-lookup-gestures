@@ -8,7 +8,7 @@
 
 ## Description
 
-_An Android application where users may enter a name of doctor into a form, submit it, and receive a list of doctors in your city (e.g. Portland).._
+_An Android application where users may register/login (Authentication), enter a name of doctor into a form from user's account, submit it, and save/retrieve a list of doctors in your city (e.g. Portland) using Firebase._
 
 ## Setup/Installation Requirements
 * Open Android Studio
