@@ -87,8 +87,9 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                          if(snapshot.getKey().equals(uid)) {
+                             while (iterator.hasNext())
                             doctors.add(iterator.next().getValue(Doctor.class));
-                             break;
+
                          }
                 }
 

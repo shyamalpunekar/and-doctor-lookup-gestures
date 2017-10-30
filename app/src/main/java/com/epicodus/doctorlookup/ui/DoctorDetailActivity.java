@@ -21,6 +21,7 @@ public class DoctorDetailActivity extends AppCompatActivity {
     ViewPager mViewPager;
     private DoctorPagerAdapter adapterViewPager;
     List<Doctor> mDoctors = new ArrayList<>();
+    List<Doctor> doctors = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,8 @@ public class DoctorDetailActivity extends AppCompatActivity {
 
         mDoctors = Parcels.unwrap(getIntent().getParcelableExtra("doctors"));
         int startingPosition = Integer.parseInt(getIntent().getStringExtra("position"));
-
-        adapterViewPager = new DoctorPagerAdapter(getSupportFragmentManager(), mDoctors);
+        doctors.add(mDoctors.get(startingPosition));
+        adapterViewPager = new DoctorPagerAdapter(getSupportFragmentManager(), doctors);
         mViewPager.setAdapter(adapterViewPager);
         mViewPager.setCurrentItem(startingPosition);
     }
