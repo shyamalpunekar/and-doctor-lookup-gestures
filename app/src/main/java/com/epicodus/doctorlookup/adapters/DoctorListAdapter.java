@@ -89,9 +89,21 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
             mTitleTextView.setText("Title: " + doctor.getTitle());
             mFirstNameTextView.setText("First Name: " + doctor.getFirstName());
             mLastNameTextView.setText("Last Name: " +doctor.getLastName());
-            mPhoneTextView.setText("Phones: " + doctor.getPhones());
-            mWebsiteTextView.setText("Websites:" + doctor.getWebsites().toString());
-            if(doctor.isAccepts_new_patients()){
+
+            for(String key : doctor.getPhones().keySet()){
+                if(!mPhoneTextView.getText().toString().contains(key))
+                mPhoneTextView.append(key + ": " + doctor.getPhones().get(key) + "\n");
+            }
+
+            for(String website : doctor.getWebsites()){
+                if(mWebsiteTextView.getText().toString().contains("No Website Available")) {
+                    mWebsiteTextView.setText("");
+                }
+                else if(!mWebsiteTextView.getText().toString().contains(website)) {
+                    mWebsiteTextView.append("Websites: " + website + "\n");
+                }
+            }
+             if(doctor.isAccepts_new_patients()){
                 mAcceptsPatients.setText("Accepts new Patients: " + "Yes");
             }
             else {
@@ -101,6 +113,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
 
         @Override
         public void onClick(View v){
+            mWebsiteTextView.clearComposingText();
             int itemPosition = getLayoutPosition();
             Intent intent = new Intent(mContext, DoctorDetailActivity.class);
 

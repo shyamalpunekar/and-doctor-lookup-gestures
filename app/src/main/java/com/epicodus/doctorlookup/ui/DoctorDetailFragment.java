@@ -50,13 +50,18 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
     TextView mWebsiteLabel;
     @Bind(R.id.phoneTextView)
     TextView mPhoneLabel;
-    @Bind(R.id.addressTextView)
-    TextView mAddressLabel;
     @Bind(R.id.saveDoctorButton)
     TextView mSaveDoctorButton;
     @Bind(R.id.doctorAcceptsPatientsTextView)
     TextView mAcceptsPatients;
-
+    @Bind(R.id.cityTextView)
+    TextView mCity;
+    @Bind(R.id.zipTextView)
+    TextView mZip;
+    @Bind(R.id.streetTextView)
+    TextView mStreet;
+    @Bind(R.id.stateTextView)
+    TextView mState;
 
     private Doctor mDoctor;
     private RecyclerView.Adapter mAdapter;
@@ -76,6 +81,7 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDoctor = Parcels.unwrap(getArguments().getParcelable("doctor"));
+
     }
 
     @Override
@@ -103,9 +109,19 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
 
         mAdapter = new DoctorListAdapter(getActivity().getApplicationContext(),doctors);
 
-        mPhoneLabel.setText("Phones: " + mDoctor.getPhones().toString());
-        mWebsiteLabel.setText("Websites: " + mDoctor.getWebsites());
-        mAddressLabel.setText("Address: " + mDoctor.getPractices().get(0).getVisitAddress().toString());
+        for(String key : mDoctor.getPhones().keySet()){
+            mPhoneLabel.append(key + ": " + mDoctor.getPhones().get(key) + "\n");
+        }
+
+        for(String website : mDoctor.getWebsites()){
+            mWebsiteLabel.append(website + "\n");
+        }
+       // mAddressLabel.setText("Address: " + mDoctor.getPractices().get(0).getVisitAddress().toString());
+        mStreet.setText("Street: " + mDoctor.getPractices().get(0).getVisitAddress().get("street"));
+        mCity.setText("City: " + mDoctor.getPractices().get(0).getVisitAddress().get("city"));
+        mZip.setText("Zip: " + mDoctor.getPractices().get(0).getVisitAddress().get("zip"));
+        mState.setText("State: " + mDoctor.getPractices().get(0).getVisitAddress().get("state"));
+
 
         mWebsiteLabel.setOnClickListener(this);
         mPhoneLabel.setOnClickListener(this);

@@ -10,6 +10,8 @@ import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.models.Doctor;
 import com.epicodus.doctorlookup.ui.DoctorDetailActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by spunek on 10/28/17.
@@ -41,19 +44,34 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
 
     public void bindDoctor(Doctor doctor) {
         //ImageView restaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
-        TextView nameTextView = (TextView) mView.findViewById(R.id.doctorNameTextView);
-        TextView categoryTextView = (TextView) mView.findViewById(R.id.doctorTitleTextView);
-        TextView ratingTextView = (TextView) mView.findViewById(R.id.doctorLastNameTextView);
+        TextView titleTextView = (TextView) mView.findViewById(R.id.doctorTitleTextView);
+        TextView firstNameTextView = (TextView) mView.findViewById(R.id.doctorFirstNameTextView);
+        TextView lastNameTextView = (TextView) mView.findViewById(R.id.doctorLastNameTextView);
 
-//        Picasso.with(mContext)
-//                .load(doctor.getImageUrl())
-//                .resize(MAX_WIDTH, MAX_HEIGHT)
-//                .centerCrop()
-//                .into(restaurantImageView);
+        TextView phoneTextView = (TextView) mView.findViewById(R.id.doctorPhoneTextView);
+        TextView websiteTextView = (TextView) mView.findViewById(R.id.doctorWebsiteTextView);
+        TextView mAcceptsPatients = (TextView) mView.findViewById(R.id.doctorAcceptsPatientsTextView);
+        for(String website: doctor.getWebsites()) {
 
-        nameTextView.setText(doctor.getFirstName());
-        categoryTextView.setText(doctor.getTitle());
-        ratingTextView.setText("Rating: " + doctor.getLastName());
+            websiteTextView.setText("Websites: " + website);
+
+        }
+
+        firstNameTextView.setText("First Name: "+ doctor.getFirstName());
+        lastNameTextView.setText("Last Name: " + doctor.getLastName());
+        titleTextView.setText("Title: " + doctor.getTitle());
+
+        if(doctor.isAccepts_new_patients()){
+            mAcceptsPatients.setText("Accepts new Patients: " + "Yes");
+        }
+        else {
+            mAcceptsPatients.setText("Accepts new Patients: " + "No");
+        }
+
+        for(String key: doctor.getPhones().keySet()) {
+            phoneTextView.setText("Phone " + key + ": " + doctor.getPhones().get(key));
+        }
+
     }
 
     @Override
@@ -61,11 +79,17 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         final ArrayList<Doctor> doctors = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_DOCTORS);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    doctors.add(snapshot.getValue(Doctor.class));
+                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                         if(snapshot.getKey().equals(uid)) {
+                            doctors.add(iterator.next().getValue(Doctor.class));
+                             break;
+                         }
                 }
 
                 int itemPosition = getLayoutPosition();

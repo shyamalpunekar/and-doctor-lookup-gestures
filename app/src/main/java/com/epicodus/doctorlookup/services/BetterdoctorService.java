@@ -53,11 +53,11 @@ public class BetterdoctorService {
 
     public ArrayList<Doctor> processResults(Response response) {
         ArrayList<Doctor> doctors = new ArrayList<>();
-        Set<String> websites = new HashSet<>();
+
         Map<String, String> phones = null;
         boolean accepts_new_patients =false;
 
-        List<Practice> practices = new ArrayList<>();
+
         try {
             String jsonData = response.body().string();
             JSONObject doctorJson = new JSONObject(jsonData);
@@ -70,39 +70,28 @@ public class BetterdoctorService {
                 for (int i = 0; i < businessesJSON.length(); i++) {
                     JSONObject doctorJSON = businessesJSON.getJSONObject(i);
                     String uuid = doctorJSON.get("uid").toString();
-
+                    Set<String> websites = new HashSet<>();
 
                     String firstName = doctorJSON.getJSONObject("profile").get("first_name").toString();
                     String lastName = doctorJSON.getJSONObject("profile").get("last_name").toString();
                     String title = doctorJSON.getJSONObject("profile").get("title").toString();
-                    ;
 
-                  //  String ratings = doctorJSON.getJSONObject("ratings").toString();
-
-//                if(doctorJSON.getJSONObject("ratings").getJSONArray() {
-//
-//                }
+                    List<Practice> practices = new ArrayList<>();
                     if (doctorJSON.getJSONArray("practices") != null) {
-                        boolean isWebsiteExists = false;
-                        boolean isVisitAddress = false;
                         for (int j = 0; j < doctorJSON.getJSONArray("practices").length(); j++) {
                             Practice individualPractice = new Practice();
                             JSONObject practice = doctorJSON.getJSONArray("practices").getJSONObject(j);
 
                             if (!practice.isNull("website")) {
-                                isWebsiteExists = true;
                                 websites.add(practice.get("website").toString());
                                 individualPractice.setWebsite(practice.get("website").toString());
 
-                            } else {
-                                individualPractice.setWebsite("Website No Available");
                             }
-
                             if (!practice.isNull("accepts_new_patients")) {
                                 if (practice.getBoolean("accepts_new_patients"))
                                     accepts_new_patients = true;
                             } else {
-                                individualPractice.setWebsite("Website No Available");
+                                accepts_new_patients =false;
                             }
 
                             if (practice.getJSONArray("phones") != null) {
@@ -130,28 +119,28 @@ public class BetterdoctorService {
 
                             if (!practice.isNull("visit_address")) {
                                 Map<String, String> visitAddress = new HashMap<>();
-                                isVisitAddress = true;
-                                visitAddress.put("City: ", practice.getJSONObject("visit_address").get("city").toString());
-                                visitAddress.put("State: ", practice.getJSONObject("visit_address").get("state").toString());
-                                visitAddress.put("Street: ", practice.getJSONObject("visit_address").get("street").toString());
-//                           visitAddress.put("Street2: ",practice.getJSONObject("visit_address").get("street2").toString());
-                                visitAddress.put("Zip: ", practice.getJSONObject("visit_address").get("zip").toString());
+                                visitAddress.put("street", practice.getJSONObject("visit_address").get("street").toString());
+                                visitAddress.put("city", practice.getJSONObject("visit_address").get("city").toString());
+                                visitAddress.put("zip", practice.getJSONObject("visit_address").get("zip").toString());
+                                visitAddress.put("state", practice.getJSONObject("visit_address").get("state").toString());
 
                                 individualPractice.setVisitAddress(visitAddress);
                                 practices.add(individualPractice);
 
                             } else {
                                 Map<String, String> visitAddress = new HashMap<>();
-                                visitAddress.put("Visit Address", "Not Avilable");
+                                visitAddress.put("Visit Address", "Not Available");
                                 individualPractice.setVisitAddress(visitAddress);
                             }
 
                         }
-
-                        if (!isWebsiteExists && websites.size() == 0) {
+                        if (websites.size() == 0) {
                             websites.add("No Website Available");
                         }
+
                     }
+
+
 
                     if (doctorJSON.getJSONArray("specialties") != null) {
 
