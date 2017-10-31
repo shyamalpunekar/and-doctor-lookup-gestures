@@ -47,6 +47,7 @@
         android:background="@color/colorPrimary"
         android:text="My Saved Doctors"
         android:textColor="@color/colorTextIcons"
+        android:textSize="24sp"
         android:visibility="visible" />
 
 
@@ -54,12 +55,15 @@
         android:id="@+id/findDoctorsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/savedDoctorsButton"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="45dp"
+        android:layout_marginLeft="@android:dimen/notification_large_icon_height"
+        android:layout_marginRight="@android:dimen/notification_large_icon_height"
         android:background="@color/colorPrimary"
         android:text="Find Doctors"
         android:textColor="@color/colorTextIcons"
-        android:visibility="visible"
-        android:layout_above="@+id/savedDoctorsButton"
-        android:layout_centerHorizontal="true" />
+        android:textSize="24sp"
+        android:visibility="visible" />
 
 </RelativeLayout>
