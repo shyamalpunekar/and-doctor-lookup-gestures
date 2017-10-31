@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 
         //ad font
-        Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/ostrich-regular.ttf");
+        Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         mAppNameTextView.setTypeface(ostrichFont);
 
        // mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
