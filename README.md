@@ -31,10 +31,10 @@ _An Android application where users may register/login (Authentication), enter a
 | The user should be able to logout successfully | Click logout |  |
 
 # Screenshots
-![image of Doctor list-output](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/DoctorList.png)
-![image of doctor forebase](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/firebase-zink.png)
+![image of Doctor list-output]()
+![image of doctor forebase]()
 
-![image of doctor detail from user-account](https://github.com/shyamalpunekar/and-doctor-lookup-firebase/blob/master/screenshots/doctor-details-zink-user1-saved.png)
+![image of doctor detail from user-account]()
 
 
 # Setup
