@@ -75,6 +75,7 @@ public class BetterdoctorService {
                     String firstName = doctorJSON.getJSONObject("profile").get("first_name").toString();
                     String lastName = doctorJSON.getJSONObject("profile").get("last_name").toString();
                     String title = doctorJSON.getJSONObject("profile").get("title").toString();
+                    String imageUrl = doctorJSON.getJSONObject("profile").get("image_url").toString();
 
                     List<Practice> practices = new ArrayList<>();
                     if (doctorJSON.getJSONArray("practices") != null) {
@@ -176,7 +177,7 @@ public class BetterdoctorService {
                     }
                     List<String> websitesList = new ArrayList<>(websites);
                     Doctor doctor = new Doctor(uuid, firstName, lastName, title,
-                            websitesList, phones, practices, accepts_new_patients, specialties);
+                            websitesList, phones, imageUrl, practices, accepts_new_patients, specialties);
                     doctors.add(doctor);
                 }
             }

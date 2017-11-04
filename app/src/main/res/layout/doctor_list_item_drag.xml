@@ -9,20 +9,20 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/doctorImageView"
             android:layout_width="130dp"
             android:layout_height="100dp"
-            android:id="@+id/restaurantImageView"
-
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/waffles" />
 
         <ImageView
             android:id="@+id/dragIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignLeft="@id/restaurantImageView"
-            android:layout_alignBottom="@id/restaurantImageView"
+            android:layout_alignBottom="@id/doctorImageView"
+            android:layout_alignLeft="@id/doctorImageView"
             android:gravity="bottom|left"
-            android:src="@drawable/ic_reorder_white_24dp"/>
+            android:src="@drawable/ic_reorder_white_24dp" />
 
     </RelativeLayout>
 

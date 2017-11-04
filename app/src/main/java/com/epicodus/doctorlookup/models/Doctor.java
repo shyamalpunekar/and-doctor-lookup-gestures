@@ -16,6 +16,7 @@ public class Doctor {
     private String firstName;
     private String lastName;
     private String title;
+    private String imageUrl;
     private List<String> websites;
     private Map<String, String> phones;
     private List<Practice> practices;
@@ -26,7 +27,7 @@ public class Doctor {
 
     public Doctor(){}
 
-    public Doctor(String uuid, String firstName, String lastName, String title, List<String> websites, Map<String, String> phones, List<Practice> practices, boolean accepts_new_patients,
+    public Doctor(String uuid, String firstName, String lastName, String title, List<String> websites, Map<String, String> phones, String imageUrl, List<Practice> practices, boolean accepts_new_patients,
                   List<Specialty> specialties) {
         this.uuid = uuid;
         this.firstName = firstName;
@@ -37,6 +38,7 @@ public class Doctor {
         this.practices = practices;
         this.accepts_new_patients = accepts_new_patients;
         this.specialties = specialties;
+        this.imageUrl = imageUrl;
 
     }
 
@@ -120,5 +122,13 @@ public class Doctor {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
+import com.epicodus.doctorlookup.adapters.FirebaseDoctorListAdapter;
 import com.epicodus.doctorlookup.adapters.FirebaseDoctorViewHolder;
 import com.epicodus.doctorlookup.models.Doctor;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.epicodus.doctorlookup.util.OnStartDragListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -18,9 +20,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SavedDoctorListActivity extends AppCompatActivity {
+public class SavedDoctorListActivity extends AppCompatActivity implements OnStartDragListener {
     private DatabaseReference mDoctorReference;
-    private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private FirebaseDoctorListAdapter mFirebaseAdapter;
+    //private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private ItemTouchHelper mItemTouchHelper;
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -44,19 +48,23 @@ public class SavedDoctorListActivity extends AppCompatActivity {
     }
 
     private void setUpFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Doctor, FirebaseDoctorViewHolder>
-                (Doctor.class, R.layout.doctor_list_item, FirebaseDoctorViewHolder.class,
-                        mDoctorReference) {
 
-            @Override
-            protected void populateViewHolder(FirebaseDoctorViewHolder viewHolder,
-                                              Doctor model, int position) {
-                viewHolder.bindDoctor(model);
-            }
-        };
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mFirebaseAdapter = new FirebaseDoctorListAdapter(Doctor.class,
+                R.layout.doctor_list_item_drag, FirebaseDoctorViewHolder.class,
+                mDoctorReference, this, this);
+
+
+
+            mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new
+
+            LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
+
+//        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
+//        mItemTouchHelper = new ItemTouchHelper(callback);
+//        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+
     }
 
     @Override
@@ -64,4 +72,10 @@ public class SavedDoctorListActivity extends AppCompatActivity {
         super.onDestroy();
         mFirebaseAdapter.cleanup();
     }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
 }
+
