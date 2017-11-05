@@ -1,14 +1,18 @@
 # Doctor Lookup Android Independent Project
 
-#### Doctor Lookup Application, October 20 2017
+#### Doctor Lookup Application, November 03 2017
 
-##### Usage -  Firebase user registration, authentication, Data Persistence, saving/retrieval from User account. 
+##### Usage -  Firebase user registration, authentication, Data Persistence, saving/retrieval, deletion from User account. 
 
 #### By Shyamal Punekar
 
 ## Description
 
-_An Android application where users may register/login (Authentication), enter a name of doctor into a form from user's account, submit it, and save/retrieve a list of doctors in your city (e.g. Portland) using Firebase._
+_An Android application where users may_
+
+* register/login (Authentication)
+* enter a name of doctor into a form from user's account, submit it
+* save/retrieve a list of doctors in your city (e.g. Portland) using Gestures.
 
 ## Setup/Installation Requirements
 * Open Android Studio
@@ -17,6 +21,8 @@ _An Android application where users may register/login (Authentication), enter a
 * Run an Application. 
 * Firebase user authentication
 * save and retrieve data to Firebase
+* swipe left or right to delete details from saved doctor lists.
+* Drag/drop to/from position in saved doctor list
 * Use the application to see list of doctors in Portland-San Fransisco city by entering name in user's form.
 
 ## Specifications
@@ -29,16 +35,17 @@ _An Android application where users may register/login (Authentication), enter a
 | A user should be able to to click on name to receive a doctor's information in the Portland area that fit the search query |Zink |Display doctor's information| |
 | The user should be able to navigate between Home Page and doctor list page |  |  |
 | The user should be able to logout successfully | Click logout |  |
+| The user should be able to swipe right/left successfully to delete saved details | swipe left/right | details will be deleted |
+| The user should be able to drag and drop successfully | drag from/to position |  |
 
 # Screenshots
 ![image of Doctor list-output]()
 ![image of doctor forebase]()
 
-![image of doctor detail from user-account]()
 
 
 # Setup
-  https://github.com/shyamalpunekar/and-doctor-lookup-firebase
+  https://github.com/shyamalpunekar/and-doctor-lookup-gestures
 
 # Support and contact details
 
