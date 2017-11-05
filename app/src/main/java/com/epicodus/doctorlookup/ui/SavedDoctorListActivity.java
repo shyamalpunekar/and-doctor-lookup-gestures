@@ -37,6 +37,18 @@ public class SavedDoctorListActivity extends AppCompatActivity implements OnStar
         setContentView(R.layout.activity_doctors);
         ButterKnife.bind(this);
 
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user.getUid();
+//
+//        mDoctorReference = FirebaseDatabase
+//                .getInstance()
+//                .getReference(Constants.FIREBASE_CHILD_DOCTORS)
+//                .child(uid);
+
+        setUpFirebaseAdapter();
+    }
+
+    private void setUpFirebaseAdapter() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
@@ -45,21 +57,16 @@ public class SavedDoctorListActivity extends AppCompatActivity implements OnStar
                 .getReference(Constants.FIREBASE_CHILD_DOCTORS)
                 .child(uid);
 
-        setUpFirebaseAdapter();
-    }
-
-    private void setUpFirebaseAdapter() {
-
         mFirebaseAdapter = new FirebaseDoctorListAdapter(Doctor.class,
                 R.layout.doctor_list_item_drag, FirebaseDoctorViewHolder.class,
                 mDoctorReference, this, this);
 
 
 
-            mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new
 
-            LinearLayoutManager(this));
+                LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
