@@ -13,7 +13,7 @@
             android:layout_width="130dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/waffles" />
+            android:src="@drawable/doctors" />
 
         <ImageView
             android:id="@+id/dragIcon"

@@ -1,29 +1,14 @@
 package com.epicodus.doctorlookup.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.models.Doctor;
-import com.epicodus.doctorlookup.ui.DoctorDetailActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by spunek on 10/28/17.
@@ -47,7 +32,7 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindDoctor(Doctor doctor) {
-         mDoctorImageView = (ImageView) mView.findViewById(R.id.doctorImageView);
+        mDoctorImageView = (ImageView) mView.findViewById(R.id.doctorImageView);
 
         TextView titleTextView = (TextView) mView.findViewById(R.id.doctorTitleTextView);
         TextView firstNameTextView = (TextView) mView.findViewById(R.id.doctorFirstNameTextView);
@@ -64,67 +49,68 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder {
                 .centerCrop()
                 .into(mDoctorImageView);
 
-        firstNameTextView.setText("First Name: "+ doctor.getFirstName());
+        firstNameTextView.setText("First Name: " + doctor.getFirstName());
         lastNameTextView.setText("Last Name: " + doctor.getLastName());
         titleTextView.setText("Title: " + doctor.getTitle());
 
-        if(doctor.isAccepts_new_patients()){
+        if (doctor.isAccepts_new_patients()) {
             mAcceptsPatients.setText("Accepts new Patients: " + "Yes");
-        }
-        else {
+        } else {
             mAcceptsPatients.setText("Accepts new Patients: " + "No");
         }
-        for(String key : doctor.getPhones().keySet()){
-            if(!phoneTextView.getText().toString().contains(key))
+        for (String key : doctor.getPhones().keySet()) {
+            if (!phoneTextView.getText().toString().contains(key))
                 phoneTextView.append(key + ": " + doctor.getPhones().get(key) + "\n");
         }
-        for(String website : doctor.getWebsites()){
-            if(websiteTextView.getText().toString().contains("No Website Available")) {
+        for (String website : doctor.getWebsites()) {
+            if (websiteTextView.getText().toString().contains("No Website Available")) {
                 websiteTextView.setText("");
-            }
-            else if(!websiteTextView.getText().toString().contains(website)) {
+            } else if (!websiteTextView.getText().toString().contains(website)) {
                 websiteTextView.append("Websites: " + website + "\n");
             }
         }
 
     }
 
-    @Override
-    public void onClick(View view) {
-        final ArrayList<Doctor> doctors = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_DOCTORS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String uid = user.getUid();
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-                    if(snapshot.getKey().equals(uid)) {
-                        while (iterator.hasNext())
-                            doctors.add(iterator.next().getValue(Doctor.class));
-
-                    }
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(mContext, DoctorDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("doctors", Parcels.wrap(doctors));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 
 
-
+//    @Override
+//    public void onClick(View view) {
+//        final ArrayList<Doctor> doctors = new ArrayList<>();
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_DOCTORS);
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//            String uid = user.getUid();
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+//                    if (snapshot.getKey().equals(uid)) {
+//                        while (iterator.hasNext())
+//                            doctors.add(iterator.next().getValue(Doctor.class));
+//
+//                    }
+//                }
+//
+//                int itemPosition = getLayoutPosition();
+//
+//                Intent intent = new Intent(mContext, DoctorDetailActivity.class);
+//                intent.putExtra("position", itemPosition + "");
+//                intent.putExtra("doctors", Parcels.wrap(doctors));
+//
+//                mContext.startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//    }
 
 
 }
+
+
+
+
