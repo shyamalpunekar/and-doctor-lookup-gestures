@@ -43,11 +43,11 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        //itemView.setOnClickListener(this);
+        itemView.setOnClickListener(this);
     }
 
     public void bindDoctor(Doctor doctor) {
-        ImageView restaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
+         mDoctorImageView = (ImageView) mView.findViewById(R.id.doctorImageView);
 
         TextView titleTextView = (TextView) mView.findViewById(R.id.doctorTitleTextView);
         TextView firstNameTextView = (TextView) mView.findViewById(R.id.doctorFirstNameTextView);
@@ -56,11 +56,7 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         TextView phoneTextView = (TextView) mView.findViewById(R.id.doctorPhoneTextView);
         TextView websiteTextView = (TextView) mView.findViewById(R.id.doctorWebsiteTextView);
         TextView mAcceptsPatients = (TextView) mView.findViewById(R.id.doctorAcceptsPatientsTextView);
-        for(String website: doctor.getWebsites()) {
 
-            websiteTextView.setText("Websites: " + website);
-
-        }
 
         Picasso.with(mContext)
                 .load(doctor.getImageUrl())
@@ -78,9 +74,17 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         else {
             mAcceptsPatients.setText("Accepts new Patients: " + "No");
         }
-
-        for(String key: doctor.getPhones().keySet()) {
-            phoneTextView.setText("Phone " + key + ": " + doctor.getPhones().get(key));
+        for(String key : doctor.getPhones().keySet()){
+            if(!phoneTextView.getText().toString().contains(key))
+                phoneTextView.append(key + ": " + doctor.getPhones().get(key) + "\n");
+        }
+        for(String website : doctor.getWebsites()){
+            if(websiteTextView.getText().toString().contains("No Website Available")) {
+                websiteTextView.setText("");
+            }
+            else if(!websiteTextView.getText().toString().contains(website)) {
+                websiteTextView.append("Websites: " + website + "\n");
+            }
         }
 
     }

@@ -12,6 +12,7 @@ import com.epicodus.doctorlookup.adapters.FirebaseDoctorListAdapter;
 import com.epicodus.doctorlookup.adapters.FirebaseDoctorViewHolder;
 import com.epicodus.doctorlookup.models.Doctor;
 import com.epicodus.doctorlookup.util.OnStartDragListener;
+import com.epicodus.doctorlookup.util.SimpleItemTouchHelperCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -61,9 +62,9 @@ public class SavedDoctorListActivity extends AppCompatActivity implements OnStar
             LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
 
-//        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
-//        mItemTouchHelper = new ItemTouchHelper(callback);
-//        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     }
 
