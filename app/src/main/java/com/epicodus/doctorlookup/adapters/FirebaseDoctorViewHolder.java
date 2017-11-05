@@ -29,7 +29,7 @@ import java.util.Iterator;
  * Created by spunek on 10/28/17.
  */
 
-public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView mDoctorImageView;
 
@@ -43,7 +43,7 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
+        //itemView.setOnClickListener(this);
     }
 
     public void bindDoctor(Doctor doctor) {

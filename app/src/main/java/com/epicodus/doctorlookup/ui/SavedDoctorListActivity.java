@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,14 +38,6 @@ public class SavedDoctorListActivity extends AppCompatActivity implements OnStar
         setContentView(R.layout.activity_doctors);
         ButterKnife.bind(this);
 
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        String uid = user.getUid();
-//
-//        mDoctorReference = FirebaseDatabase
-//                .getInstance()
-//                .getReference(Constants.FIREBASE_CHILD_DOCTORS)
-//                .child(uid);
-
         setUpFirebaseAdapter();
     }
 
@@ -52,14 +45,15 @@ public class SavedDoctorListActivity extends AppCompatActivity implements OnStar
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        mDoctorReference = FirebaseDatabase
+        Query query = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_DOCTORS)
-                .child(uid);
+                .child(uid)
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
 
         mFirebaseAdapter = new FirebaseDoctorListAdapter(Doctor.class,
                 R.layout.doctor_list_item_drag, FirebaseDoctorViewHolder.class,
-                mDoctorReference, this, this);
+                query, this, this);
 
 
 

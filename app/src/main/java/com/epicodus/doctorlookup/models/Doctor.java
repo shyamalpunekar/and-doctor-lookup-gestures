@@ -23,6 +23,7 @@ public class Doctor {
     private boolean accepts_new_patients;
     private List<Specialty> specialties;
     private String pushId;
+    String index;
 
 
     public Doctor(){}
@@ -39,6 +40,7 @@ public class Doctor {
         this.accepts_new_patients = accepts_new_patients;
         this.specialties = specialties;
         this.imageUrl = imageUrl;
+        this.index = "not_specified";
 
     }
 
@@ -130,5 +132,12 @@ public class Doctor {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }
