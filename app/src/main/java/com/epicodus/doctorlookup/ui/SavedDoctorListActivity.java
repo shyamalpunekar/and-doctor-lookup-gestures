@@ -24,9 +24,7 @@ public class SavedDoctorListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_doctors);
-
-
+        setContentView(R.layout.activity_saved_doctor_list);
 
     }
 
