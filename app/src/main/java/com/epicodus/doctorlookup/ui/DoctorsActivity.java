@@ -1,39 +1,28 @@
 package com.epicodus.doctorlookup.ui;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
 import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
-import com.epicodus.doctorlookup.adapters.MyDoctorsArrayAdapter;
 import com.epicodus.doctorlookup.models.Doctor;
-import com.epicodus.doctorlookup.services.BetterdoctorService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class DoctorsActivity extends AppCompatActivity {
 
@@ -59,30 +48,20 @@ public class DoctorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctors);
 
-        ButterKnife.bind(this);
-        MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors);
-        mListView.setAdapter(adapter);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String doctor = ((TextView) view).getText().toString();
-
-            }
-        });
-
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-
-        getDoctors(name);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            getDoctors(mRecentAddress);
-        }
-
+//        ButterKnife.bind(this);
+//        MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors);
+//        mListView.setAdapter(adapter);
+//
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                String doctor = ((TextView) view).getText().toString();
+//
+//            }
+//        });
+//
+//        Intent intent = getIntent();
+//        String name = intent.getStringExtra("name");
 
     }
 
@@ -103,7 +82,7 @@ public class DoctorsActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 addToSharedPreferences(query);
-                getDoctors(query);
+                //getDoctors(query);
                 return false;
             }
 
@@ -128,52 +107,52 @@ public class DoctorsActivity extends AppCompatActivity {
     }
 
 
-
-    private void getDoctors(String name) {
-        final BetterdoctorService betterdoctorService = new BetterdoctorService();
-
-        betterdoctorService.findRDoctors(name, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.w("MyTag", "requestFailed");
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                try {
-
-                    mDoctors = betterdoctorService.processResults(response);
-
-                    DoctorsActivity.this.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-
-
-                            mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
-                            mRecyclerView.setAdapter(mAdapter);
-                            RecyclerView.LayoutManager layoutManager =
-                                    new LinearLayoutManager(DoctorsActivity.this);
-                            mRecyclerView.setLayoutManager(layoutManager);
-                            mRecyclerView.setHasFixedSize(true);
-
-
-                        }
-
-                    });
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-
-                }
-            }
-
-        });
-
-    }
+//
+//    private void getDoctors(String name) {
+//        final BetterdoctorService betterdoctorService = new BetterdoctorService();
+//
+//        betterdoctorService.findRDoctors(name, new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.w("MyTag", "requestFailed");
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//
+//                try {
+//
+//                    mDoctors = betterdoctorService.processResults(response);
+//
+//                    DoctorsActivity.this.runOnUiThread(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//
+//
+//                            mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
+//                            mRecyclerView.setAdapter(mAdapter);
+//                            RecyclerView.LayoutManager layoutManager =
+//                                    new LinearLayoutManager(DoctorsActivity.this);
+//                            mRecyclerView.setLayoutManager(layoutManager);
+//                            mRecyclerView.setHasFixedSize(true);
+//
+//
+//                        }
+//
+//                    });
+//
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//
+//
+//                }
+//            }
+//
+//        });
+//
+//    }
 
 }
