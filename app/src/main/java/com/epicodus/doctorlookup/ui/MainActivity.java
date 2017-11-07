@@ -144,31 +144,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
 
-               // String name = mLocationEditText.getText().toString();
-
-
-               // saveNameToFirebase(name);
-
-
-                if (v == mSavedDoctorsButton) {
+                    if (v == mSavedDoctorsButton) {
                     Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
                     startActivity(intent);
                 }
 
-//                if (name.equals("") || name == null ){
-//
-//                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-//                    dlgAlert.setMessage("Please enter valid Name");
-//                    dlgAlert.create().show();
-//                    return;
-//
-//                }
-//                else {
-//                    Intent intent = new Intent(MainActivity.this, DoctorsActivity.class);
-//                    intent.putExtra("name", name);
-//
-//                    startActivity(intent);
-//                }
 
             }
 
@@ -177,13 +157,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchedNameReference.push().setValue(name);
     }
 
-
-    //destroy app when user quits the activity
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        mSearchedNameReference.removeEventListener(mSearchedNameReferenceListener);
-//    }
 
 }
 

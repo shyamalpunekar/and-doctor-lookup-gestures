@@ -10,16 +10,9 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.epicodus.doctorlookup.Constants;
 import com.epicodus.doctorlookup.R;
-import com.epicodus.doctorlookup.adapters.DoctorListAdapter;
-import com.epicodus.doctorlookup.models.Doctor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,39 +23,15 @@ public class DoctorsActivity extends AppCompatActivity {
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
-    private String mRecentAddress;
 
-    @Bind(R.id.nameTextView)
-    TextView mNameTextView;
-    @Bind(R.id.listView)
-    ListView mListView;
+
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    private DoctorListAdapter mAdapter;
-    public List<Doctor> mDoctors = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctors);
-
-//        ButterKnife.bind(this);
-//        MyDoctorsArrayAdapter adapter = new MyDoctorsArrayAdapter(this, android.R.layout.simple_list_item_1, mDoctors);
-//        mListView.setAdapter(adapter);
-//
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String doctor = ((TextView) view).getText().toString();
-//
-//            }
-//        });
-//
-//        Intent intent = getIntent();
-//        String name = intent.getStringExtra("name");
-
     }
 
     @Override

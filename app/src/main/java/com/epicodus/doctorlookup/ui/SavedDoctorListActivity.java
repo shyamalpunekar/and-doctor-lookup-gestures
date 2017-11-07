@@ -25,6 +25,7 @@ public class SavedDoctorListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_saved_doctor_list);
+      //  ButterKnife.bind(this);
 
     }
 
