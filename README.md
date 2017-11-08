@@ -2,7 +2,7 @@
 
 #### Doctor Lookup Application, November 03 2017
 
-##### Usage -  Firebase user registration, authentication, Data Persistence, saving/retrieval, deletion from User account. 
+##### Usage -  Firebase user registration, authentication, Data Persistence, saving/retrieval, deletion, Drag/drop from User account. 
 
 #### By Shyamal Punekar
 
@@ -38,9 +38,11 @@ _An Android application where users may_
 | The user should be able to swipe right/left successfully to delete saved details | swipe left/right | details will be deleted |
 | The user should be able to drag and drop successfully | drag from/to position |  |
 
+
 # Screenshots
-![image of Doctor list-output]()
-![image of doctor forebase]()
+![image of Doctor list-output](https://github.com/shyamalpunekar/and-doctor-lookup-gestures/blob/master/screenshots/new-screenshots/list-of-doctors.png)
+![image of doctor details from saved list](https://github.com/shyamalpunekar/and-doctor-lookup-gestures/blob/master/screenshots/new-screenshots/doctor-details-from-saved-list.png)
+![image of saved Doctor list](https://github.com/shyamalpunekar/and-doctor-lookup-gestures/blob/master/screenshots/new-screenshots/saved-doctor-list.png)
 
 
 
